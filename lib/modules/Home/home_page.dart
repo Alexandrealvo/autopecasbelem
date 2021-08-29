@@ -25,7 +25,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final LoginController loginController = Get.put(LoginController());
+  final LoginController loginController =
+      Get.put(LoginController(), permanent: true);
   final HomePageController homePageController = Get.put(HomePageController());
 
   int selectedIndex = 0;

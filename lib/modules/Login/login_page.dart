@@ -13,7 +13,7 @@ import 'dart:core';
 class LoginPage extends StatelessWidget {
   final LoginController loginController =
       Get.put(LoginController(), permanent: true);
-       final HomePageController homePageController = Get.put(HomePageController());
+  final HomePageController homePageController = Get.put(HomePageController());
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -198,9 +198,9 @@ class LoginPage extends StatelessWidget {
                                             '' ||
                                         loginController.password.value.text ==
                                             '') {
-                                       edgeAlertWidgetDangerTop(
+                                      edgeAlertWidgetDangerTop(
                                         context,
-                                              'Campo E-mail ou Senha Vazio!',
+                                        'Campo E-mail ou Senha Vazio!',
                                       );
                                     }
                                     if (_formKey.currentState.validate()) {
@@ -212,7 +212,6 @@ class LoginPage extends StatelessWidget {
                                             edgeAlertWidgetDangerTop(
                                               context,
                                               'Email ou Senha Inválidos!',
-                                              
                                             );
                                           } else {
                                             loginController.idusu.value =
@@ -229,7 +228,7 @@ class LoginPage extends StatelessWidget {
                                                 value['genero'];
                                             loginController.phone.value =
                                                 value['phone'];
-                                            Get.offNamed('/home');
+                                            Get.toNamed('/home');
                                           }
                                         },
                                       );

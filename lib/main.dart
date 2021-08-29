@@ -12,13 +12,9 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'modules/Login/login_page.dart';
 
-
-
 void main() {
-
-  
   runApp(GetMaterialApp(
-     localizationsDelegates: [
+    localizationsDelegates: [
       RefreshLocalizations.delegate,
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
@@ -32,7 +28,10 @@ void main() {
         name: '/login',
         page: () => LoginPage(),
       ),
-      GetPage(name: '/home', page: () => HomePage(),),
+      GetPage(
+        name: '/home',
+        page: () => HomePage(),
+      ),
       GetPage(
         name: '/senha',
         page: () => Senha(),
@@ -52,12 +51,10 @@ void main() {
       GetPage(
         name: '/mapacliente',
         page: () => MapaCliente(),
-       
       ),
-       GetPage(
+      GetPage(
         name: '/esqueci',
         page: () => Esqueci(),
-       
       ),
     ],
   ));
