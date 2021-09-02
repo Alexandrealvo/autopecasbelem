@@ -1,4 +1,3 @@
-import 'package:apbelem/modules/Chamadas/status_controller.dart';
 import 'package:apbelem/modules/Clientes/clientes_controller.dart';
 import 'package:apbelem/modules/Clientes/visualizar_clientes_controller.dart';
 import 'package:apbelem/utils/box_search.dart';
@@ -19,7 +18,8 @@ class Clientes extends StatefulWidget {
 }
 
 class _ClientesState extends State<Clientes> {
-  ClientesController clientesController = Get.put(ClientesController());
+  final ClientesController clientesController =
+      Get.put(ClientesController(), permanent: true);
   VisualizarClientesController visualizarClientesController =
       Get.put(VisualizarClientesController());
 
@@ -85,7 +85,8 @@ class _ClientesState extends State<Clientes> {
       String whatresp,
       String responsavel,
       String status,
-      String idchamada) {
+      String idchamada,
+      String statuscliente) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
@@ -378,7 +379,7 @@ class _ClientesState extends State<Clientes> {
                               Get.toNamed('/mudarstatus');
                             },
                             child: Text(
-                              'Editar Dados',
+                              'Informações',
                               style: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).primaryColor,
@@ -390,6 +391,8 @@ class _ClientesState extends State<Clientes> {
                       Divider(
                         height: 10,
                       ),
+                      statuscliente == 'ABERTO'
+                          ? 
                       Container(
                         width: MediaQuery.of(context).size.width,
                         child: ButtonTheme(
@@ -413,6 +416,7 @@ class _ClientesState extends State<Clientes> {
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
+                              Get.toNamed('/agendar_visitas');
                             },
                             child: Text(
                               'Agendar Visitas',
@@ -423,7 +427,8 @@ class _ClientesState extends State<Clientes> {
                             ),
                           ),
                         ),
-                      ),
+                      )
+                          : Container(),
                     ],
                   ),
                 ),
@@ -575,15 +580,21 @@ class _ClientesState extends State<Clientes> {
                                       search.responsavel,
                                       search.status,
                                       search.idcliente,
+                                      search.statuscliente,
                                     );
                                   },
                                   child: Card(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
-                                    color: Colors.green,
+                                    color: search.statuscliente != "ABERTO"
+                                        ? Colors.white30
+                                        : Colors.green,
                                     child: ListTile(
-                                        leading: Icon(Icons.business_outlined),
+                                        leading:
+                                            search.statuscliente == "ABERTO"
+                                                ? Icon(Icons.business_outlined)
+                                                : Icon(Icons.block),
                                         title: Container(
                                           child: Center(
                                             child: Text(
@@ -674,15 +685,20 @@ class _ClientesState extends State<Clientes> {
                             clientes.responsavel,
                             clientes.status,
                             clientes.idcliente,
+                            clientes.statuscliente,
                           );
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-                          color: Colors.green,
+                          color: clientes.statuscliente != "ABERTO"
+                              ? Colors.white30
+                              : Colors.green,
                           child: ListTile(
-                              leading: Icon(Icons.business_outlined),
+                              leading: clientes.statuscliente == "ABERTO"
+                                  ? Icon(Icons.business_outlined)
+                                  : Icon(Icons.block),
                               title: Container(
                                 child: Center(
                                   child: Text(

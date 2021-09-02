@@ -1,3 +1,4 @@
+import 'package:apbelem/modules/Agenda/agendar_visitas.dart';
 import 'package:apbelem/modules/Chamadas/chamadas.dart';
 import 'package:apbelem/modules/Chamadas/status_cliente.dart';
 import 'package:apbelem/modules/Clientes/clientes.dart';
@@ -65,6 +66,10 @@ void main() {
       GetPage(
         name: '/dadosresp',
         page: () => DadosResp(),
+      ),
+       GetPage(
+        name: '/agendar_visitas',
+        page: () => AgendarVisitas(),
       ),
     ],
   ));

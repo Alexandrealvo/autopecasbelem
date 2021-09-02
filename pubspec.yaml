@@ -29,6 +29,7 @@ dependencies:
   flutter_open_whatsapp: ^0.1.2
   google_maps_flutter: ^2.0.6
   font_awesome_flutter: ^9.1.0
+  table_calendar: ^3.0.0
 
 dev_dependencies:
   flutter_test:
