@@ -51,7 +51,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Icon(
-                                    Icons.notifications_active,
+                                    Icons.notifications_active_outlined,
                                     size: 40,
                                     color: Theme.of(context).primaryColor,
                                   ),
@@ -68,7 +68,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          //Get.toNamed('/avisos');
+                         Get.toNamed('/clientes');
                         },
                         child: Container(
                              decoration: BoxDecoration(
@@ -90,13 +90,13 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Icon(
-                                    Icons.edgesensor_low,
+                                    Icons.groups_outlined,
                                     size: 40,
                                     color: Theme.of(context).primaryColor,
                                   ),
                                 ),
                                 Text(
-                                  "Visitas",
+                                  "Clientes",
                                   style: GoogleFonts.montserrat(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 14,
@@ -129,13 +129,13 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Icon(
-                                    Icons.place,
+                                    Icons.edgesensor_low_outlined,
                                     size: 40,
                                     color: Theme.of(context).primaryColor,
                                   ),
                                 ),
                                 Text(
-                                  "Localização",
+                                  "Visitas",
                                   style: GoogleFonts.montserrat(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 14,
@@ -168,7 +168,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Icon(
-                                    Icons.date_range,
+                                    Icons.date_range_outlined,
                                     size: 40,
                                     color: Theme.of(context).primaryColor,
                                   ),
@@ -207,13 +207,13 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Icon(
-                                    Icons.groups,
+                                    Icons.map_outlined,
                                     size: 40,
                                     color: Theme.of(context).primaryColor,
                                   ),
                                 ),
                                 Text(
-                                  "Clientes",
+                                  "Mapa",
                                   style: GoogleFonts.montserrat(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 14,
@@ -246,7 +246,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Icon(
-                                    Icons.assessment,
+                                    Icons.assessment_outlined,
                                     size: 40,
                                     color: Theme.of(context).primaryColor,
                                   ),

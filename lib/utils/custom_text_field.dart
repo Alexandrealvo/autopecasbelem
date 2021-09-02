@@ -19,7 +19,7 @@ Widget customTextField(BuildContext context, String labelText, String hintText,
     controller: controller,
     maxLines: linesBool ? lines : 1,
     style: GoogleFonts.montserrat(
-      fontSize: 14,
+      fontSize: 12,
       color: Theme.of(context).textSelectionTheme.selectionColor,
     ),
     decoration: InputDecoration(
@@ -33,12 +33,12 @@ Widget customTextField(BuildContext context, String labelText, String hintText,
       enabled: enabled,
       hintText: hintText,
       hintStyle: GoogleFonts.montserrat(
-        fontSize: 14,
+        fontSize: 12,
         color: Theme.of(context).textSelectionTheme.selectionColor,
       ),
       labelText: labelText,
       labelStyle: GoogleFonts.montserrat(
-        fontSize: 14,
+        fontSize: 12,
         color: Theme.of(context).textSelectionTheme.selectionColor,
       ),
       isDense: true,
@@ -57,5 +57,7 @@ Widget customTextField(BuildContext context, String labelText, String hintText,
         ),
       ),
     ),
+    
   );
+  
 }

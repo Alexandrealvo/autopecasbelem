@@ -1,6 +1,7 @@
 import 'package:apbelem/modules/Chamadas/api_chamadas.dart';
 import 'package:apbelem/modules/Chamadas/chamadas_controller.dart';
 import 'package:apbelem/modules/Chamadas/visualizar_chamadas_controller.dart';
+import 'package:apbelem/modules/Clientes/clientes_controller.dart';
 import 'package:apbelem/utils/alert_button_pressed.dart';
 import 'package:apbelem/utils/box_search.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
@@ -27,6 +28,7 @@ class _ChamadasState extends State<Chamadas> {
       Get.put(VisualizarChamadasController());
 
   ChamadasController chamadasController = Get.put(ChamadasController());
+  ClientesController clientesController = Get.put(ClientesController());
 
   @override
   void initState() {
@@ -418,11 +420,6 @@ class _ChamadasState extends State<Chamadas> {
                                   ),
                                   onPressed: () {
                                     Alert(
-                                      image: Icon(
-                                        Icons.check,
-                                        color: Colors.green,
-                                        size: 60,
-                                      ),
                                       style: AlertStyle(
                                         backgroundColor: Theme.of(context)
                                             .textSelectionTheme
@@ -529,11 +526,6 @@ class _ChamadasState extends State<Chamadas> {
                                   ),
                                   onPressed: () {
                                     Alert(
-                                      image: Icon(
-                                        Icons.check,
-                                        color: Colors.green,
-                                        size: 60,
-                                      ),
                                       style: AlertStyle(
                                         backgroundColor: Theme.of(context)
                                             .textSelectionTheme
@@ -568,6 +560,7 @@ class _ChamadasState extends State<Chamadas> {
                                                 Navigator.of(context).pop();
                                                 chamadasController
                                                     .getChamadas();
+                                                Get.toNamed('/clientes');
                                                 edgeAlertWidget(
                                                   context,
                                                   'Cliente Aceito com Sucesso!',
@@ -615,7 +608,8 @@ class _ChamadasState extends State<Chamadas> {
                           ],
                         ),
                       )
-                    : Padding(
+                    : Container(),
+                /*Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
@@ -684,22 +678,7 @@ class _ChamadasState extends State<Chamadas> {
                                   ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    /* ApiChamadas.getAceitar(idchamada, "Aceito")
-                                        .then((value) {
-                                      if (value == 1) {
-                                        edgeAlertWidget(
-                                          context,
-                                          'Cliente Aceito com Sucesso!',
-                                        );
-
-                                        chamadasController.getChamadas();
-                                      } else {
-                                        onAlertButtonPressed(
-                                            context,
-                                            'Algo deu errado\n Tente novamente',
-                                            null);
-                                      }
-                                    });*/
+                                    
                                   },
                                   child: Text(
                                     'Agendar Visitas',
@@ -715,7 +694,7 @@ class _ChamadasState extends State<Chamadas> {
                             ),
                           ],
                         ),
-                      ),
+                      ),*/
               ],
             ),
           );
@@ -743,13 +722,14 @@ class _ChamadasState extends State<Chamadas> {
                   //child: Icon(Icons.block, size: 34, color: Colors.red[900]),
                 ),
                 Text(
-                  'Sem Registros de Chamadas',
+                  'Sem Registro(s) de Chamada(s)',
                   style: GoogleFonts.montserrat(
                     fontSize: 16.0,
-                    color: Theme.of(context).textSelectionTheme.selectionColor,
+                    color: Theme.of(context).buttonColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+              
               ],
             ),
           )
@@ -781,30 +761,34 @@ class _ChamadasState extends State<Chamadas> {
 
                                 return GestureDetector(
                                   onTap: () {
-                                    chamadasController.statuscliente.value =
-                                        search.statuscliente;
-                                    chamadasController.idchamada.value =
-                                        search.idchamada;
-                                    chamadasController.observacao.value =
-                                        search.observacao;
-                                    chamadasController.lat.value = search.lat;
-                                    chamadasController.lng.value = search.lng;
-                                    chamadasController.nomecliente.value =
-                                        search.nomecliente;
-                                    chamadasController.endereco.value =
-                                        search.endereco;
-                                    _configurandoModalBottomSheet(
-                                      context,
-                                      search.nomecliente,
-                                      search.endereco,
-                                      search.tel,
-                                      search.cel,
-                                      search.whatsapp,
-                                      search.whatresp,
-                                      search.responsavel,
-                                      search.status,
-                                      search.idchamada,
-                                    );
+                                    if (search.status == "Pendente") {
+                                      chamadasController.statuscliente.value =
+                                          search.statuscliente;
+                                      chamadasController.idchamada.value =
+                                          search.idchamada;
+                                      chamadasController.observacao.value =
+                                          search.observacao;
+                                      chamadasController.lat.value = search.lat;
+                                      chamadasController.lng.value = search.lng;
+                                      chamadasController.nomecliente.value =
+                                          search.nomecliente;
+                                      chamadasController.endereco.value =
+                                          search.endereco;
+                                      _configurandoModalBottomSheet(
+                                        context,
+                                        search.nomecliente,
+                                        search.endereco,
+                                        search.tel,
+                                        search.cel,
+                                        search.whatsapp,
+                                        search.whatresp,
+                                        search.responsavel,
+                                        search.status,
+                                        search.idchamada,
+                                      );
+                                    } else {
+                                      Get.toNamed('/clientes');
+                                    }
                                   },
                                   child: Card(
                                     shape: RoundedRectangleBorder(
@@ -888,30 +872,35 @@ class _ChamadasState extends State<Chamadas> {
                       var chamadas = chamadasController.chamadas[index];
                       return GestureDetector(
                         onTap: () {
-                          chamadasController.statuscliente.value =
-                              chamadas.statuscliente;
-                          chamadasController.idchamada.value =
-                              chamadas.idchamada;
-                          chamadasController.observacao.value =
-                              chamadas.observacao;
-                          chamadasController.lat.value = chamadas.lat;
-                          chamadasController.lng.value = chamadas.lng;
-                          chamadasController.nomecliente.value =
-                              chamadas.nomecliente;
-                          chamadasController.endereco.value = chamadas.endereco;
+                          if (chamadas.status == "Pendente") {
+                            chamadasController.statuscliente.value =
+                                chamadas.statuscliente;
+                            chamadasController.idchamada.value =
+                                chamadas.idchamada;
+                            chamadasController.observacao.value =
+                                chamadas.observacao;
+                            chamadasController.lat.value = chamadas.lat;
+                            chamadasController.lng.value = chamadas.lng;
+                            chamadasController.nomecliente.value =
+                                chamadas.nomecliente;
+                            chamadasController.endereco.value =
+                                chamadas.endereco;
 
-                          _configurandoModalBottomSheet(
-                            context,
-                            chamadas.nomecliente,
-                            chamadas.endereco,
-                            chamadas.tel,
-                            chamadas.cel,
-                            chamadas.whatsapp,
-                            chamadas.whatresp,
-                            chamadas.responsavel,
-                            chamadas.status,
-                            chamadas.idchamada,
-                          );
+                            _configurandoModalBottomSheet(
+                              context,
+                              chamadas.nomecliente,
+                              chamadas.endereco,
+                              chamadas.tel,
+                              chamadas.cel,
+                              chamadas.whatsapp,
+                              chamadas.whatresp,
+                              chamadas.responsavel,
+                              chamadas.status,
+                              chamadas.idchamada,
+                            );
+                          } else {
+                            Get.toNamed('/clientes');
+                          }
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -919,9 +908,7 @@ class _ChamadasState extends State<Chamadas> {
                           ),
                           color: chamadas.status == 'Pendente'
                               ? Theme.of(context).buttonColor
-                              : chamadas.status == 'Aceito'
-                                  ? Colors.green
-                                  : Colors.red,
+                              : Colors.green,
                           child: ListTile(
                               leading: RichText(
                                 text: TextSpan(

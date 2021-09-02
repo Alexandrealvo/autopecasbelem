@@ -8,7 +8,7 @@ confirmedButtonPressed(context, String text, String page) {
     image: Icon(
       Icons.check,
       color: Colors.green,
-      size: 60,
+      size: 50,
     ),
     style: AlertStyle(
       backgroundColor: Theme.of(context).textSelectionTheme.selectionColor,

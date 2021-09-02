@@ -5,7 +5,11 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 onAlertButtonPressed(context, String text, String page) {
   Alert(
-    image: Image.asset("images/logo.png"),
+    image: Icon(
+      Icons.close,
+      color: Theme.of(context).errorColor,
+      size: 50,
+    ),
     style: AlertStyle(
       backgroundColor: Theme.of(context).textSelectionTheme.selectionColor,
       animationType: AnimationType.fromTop,

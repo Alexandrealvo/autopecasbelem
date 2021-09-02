@@ -4,7 +4,7 @@ import 'package:apbelem/utils/edge_alert_danger.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
@@ -75,7 +75,7 @@ class LoginPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 410, 20, 20),
+                              padding: EdgeInsets.fromLTRB(20, 320, 20, 20),
                               child: Container(
                                 child: TextFormField(
                                   autovalidateMode:
@@ -172,7 +172,7 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+                              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                               child: ButtonTheme(
                                 height: 50.0,
                                 child: ElevatedButton(
@@ -259,6 +259,49 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                             ),
+
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                  child: Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 30, 0, 20),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        FlutterOpenWhatsapp.sendSingleMessage(
+                                            "5591981220670", "Olá");
+                                      },
+                                      child: Text(
+                                        "Fale com o Suporte",
+                                        style: GoogleFonts.montserrat(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            fontSize: 12),
+                                        textDirection: TextDirection.ltr,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                    Get.toNamed('/esqueci');
+                                  },
+                                      child: Text(
+                                        "Esqueceu a Senha?",
+                                        style: GoogleFonts.montserrat(
+                                          color:
+                                                Theme.of(context).primaryColor,
+                                            fontSize: 12),
+                                        textDirection: TextDirection.ltr,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                            )
                             /*Padding(
                               padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                               child: ButtonTheme(
@@ -287,67 +330,8 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                             ),*/
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: ButtonTheme(
-                                height: 50,
-                                child: TextButton(
-                                  style: ButtonStyle(
-                                    overlayColor: MaterialStateProperty.all(
-                                      Theme.of(context)
-                                          .accentColor
-                                          .withOpacity(.5),
-                                    ),
-                                    shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    )),
-                                  ),
-                                  onPressed: () {
-                                    // Get.toNamed('/esqueci');
-                                  },
-                                  child: Row(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          homePageController.launched =
-                                              homePageController
-                                                  .launchInBrowser(
-                                            'https://api.whatsapp.com/send?phone=5591981220670',
-                                          );
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Icon(FontAwesome.whatsapp,
-                                                    size: 20,
-                                                    color: Theme.of(context)
-                                                        .primaryColor)
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(8),
-                                            child: Text(
-                                              "Fale com o Suporte",
-                                              style: GoogleFonts.montserrat(
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  fontSize: 12),
-                                              textDirection: TextDirection.ltr,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      GestureDetector(
+
+                            /*GestureDetector(
                                         onTap: () {
                                           Get.toNamed('/esqueci');
                                         },
@@ -378,12 +362,8 @@ class LoginPage extends StatelessWidget {
                                             ],
                                           ),
                                         ]),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                                      ),*/ 
+                            
                           ],
                         ),
                       ),

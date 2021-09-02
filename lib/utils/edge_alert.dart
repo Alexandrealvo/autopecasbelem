@@ -8,5 +8,17 @@ edgeAlertWidget(context, String title) {
     gravity: EdgeAlert.BOTTOM,
     backgroundColor: Colors.green,
     icon: Icons.done,
+
+  );
+}
+
+edgeAlertWidgetTop(context, String title) {
+  return EdgeAlert.show(
+    context,
+    title: title,
+    gravity: EdgeAlert.TOP,
+    backgroundColor: Colors.green,
+    icon: Icons.done,
+    
   );
 }

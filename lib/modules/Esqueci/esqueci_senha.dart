@@ -21,7 +21,7 @@ class _EsqueciState extends State<Esqueci> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Redefinir Senha',
+          'Lembrar Senha',
           style: GoogleFonts.montserrat(
             fontSize: 16,
             color: Theme.of(context).textSelectionTheme.selectionColor,
@@ -58,7 +58,7 @@ class _EsqueciState extends State<Esqueci> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        'Informe o seu e-mail cadastrado que iremos lhe enviar a senha.',
+                                        'Informe o seu e-mail cadastrado que iremos lhe encaminhar a sua senha por e-mail.',
                                         style: GoogleFonts.montserrat(
                                           color: Theme.of(context)
                                               .textSelectionTheme
@@ -158,13 +158,13 @@ class _EsqueciState extends State<Esqueci> {
                                         if (value == 1) {
                                           confirmedButtonPressed(
                                             context,
-                                            "Enviamos um e-mail para a redefinição de senha. Aguarde!",
+                                            "Enviamos um e-mail com a senha. Aguarde!",
                                             "/login",
                                           );
                                         } else {
                                           onAlertButtonPressed(
                                             context,
-                                            "E-mail não existe em nosso banco de dados!Tente novamente.",
+                                            "E-mail não existe no banco de dados!Tente novamente.",
                                             null,
                                           );
                                         }

@@ -7,7 +7,7 @@ class ApiEmail {
   static Future email() async {
     EmailController emailController = Get.put(EmailController());
     return await http.post(
-      Uri.https('condosocio.com.br', '/flutter/email_redefinir.php'),
+      Uri.https('admautopecasbelem.com.br', '/login/flutter/lembrar_senha.php'),
       body: {
         'email': emailController.emailesqueci.value.text,
       },
