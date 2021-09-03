@@ -105,10 +105,8 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                                   ),
                                   value: agendaController.checkeddom.value,
                                   onChanged: (newValue) {
-                                    setState(() {
-                                      agendaController.checkeddom.value =
-                                          newValue;
-                                    });
+                                    agendaController.checkeddom.value =
+                                        newValue;
                                   },
                                   activeColor: Theme.of(context).buttonColor,
                                   controlAffinity:
@@ -126,9 +124,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                             ),
                             value: agendaController.checkedseg.value,
                             onChanged: (newValue) {
-                              setState(() {
-                                agendaController.checkedseg.value = newValue;
-                              });
+                              agendaController.checkedseg.value = newValue;
                             },
                             controlAffinity: ListTileControlAffinity.platform,
                             activeColor: Theme.of(context)
@@ -147,9 +143,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                             ),
                             value: agendaController.checkedter.value,
                             onChanged: (newValue) {
-                              setState(() {
-                                agendaController.checkedter.value = newValue;
-                              });
+                              agendaController.checkedter.value = newValue;
                             },
                             activeColor: Theme.of(context).buttonColor,
                             controlAffinity: ListTileControlAffinity
@@ -168,9 +162,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                             ),
                             value: agendaController.checkedqua.value,
                             onChanged: (newValue) {
-                              setState(() {
-                                agendaController.checkedqua.value = newValue;
-                              });
+                              agendaController.checkedqua.value = newValue;
                             },
                             activeColor: Theme.of(context).buttonColor,
                             controlAffinity: ListTileControlAffinity
@@ -189,9 +181,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                             ),
                             value: agendaController.checkedqui.value,
                             onChanged: (newValue) {
-                              setState(() {
-                                agendaController.checkedqui.value = newValue;
-                              });
+                              agendaController.checkedqui.value = newValue;
                             },
                             activeColor: Theme.of(context).buttonColor,
                             controlAffinity: ListTileControlAffinity
@@ -210,9 +200,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                             ),
                             value: agendaController.checkedsex.value,
                             onChanged: (newValue) {
-                              setState(() {
-                                agendaController.checkedsex.value = newValue;
-                              });
+                              agendaController.checkedsex.value = newValue;
                             },
                             activeColor: Theme.of(context).buttonColor,
                             controlAffinity: ListTileControlAffinity
@@ -231,9 +219,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                             ),
                             value: agendaController.checkedsab.value,
                             onChanged: (newValue) {
-                              setState(() {
-                                agendaController.checkedsab.value = newValue;
-                              });
+                              agendaController.checkedsab.value = newValue;
                             },
                             activeColor: Theme.of(context).buttonColor,
                             controlAffinity: ListTileControlAffinity
@@ -266,7 +252,9 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                                 agendaController
                                     .getAgendarVisitas()
                                     .then((value) {
-                                  print(value);
+                                  print('valor: $value');
+                                  print(agendaController.diasArray);
+
                                   if (value == 1) {
                                     edgeAlertWidget(
                                       context,

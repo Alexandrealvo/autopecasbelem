@@ -39,7 +39,6 @@ class AgendaController extends GetxController {
   ];
 
   getAgendarVisitas() async {
-    diasArray = [].obs;
     if (checkeddom.value == true) {
       diasArray = diasArray + [0];
     }
@@ -72,7 +71,6 @@ class AgendaController extends GetxController {
       var dados = json.decode(response.body);
 
       isLoading(false);
-      print(dados);
       return dados;
     }
   }
@@ -82,7 +80,6 @@ class AgendaController extends GetxController {
     // init();
     // agendaReservas();
     super.onInit();
-
     isLoading(false);
   }
 }

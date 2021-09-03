@@ -17,7 +17,7 @@ class ApiAgendar {
         'idusu': loginController.idusu.value,
         'idcliente': agendaController.idcliente.value,
         'periodo': agendaController.itemSelecionado.value,
-        'dias': agendaController.diasArray,
+        'dias': agendaController.diasArray.toString(),
       },
     );
   }
