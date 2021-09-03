@@ -1,3 +1,4 @@
+import 'package:apbelem/modules/Agenda/agenda_controller.dart';
 import 'package:apbelem/modules/Clientes/clientes_controller.dart';
 import 'package:apbelem/modules/Clientes/visualizar_clientes_controller.dart';
 import 'package:apbelem/utils/box_search.dart';
@@ -22,6 +23,7 @@ class _ClientesState extends State<Clientes> {
       Get.put(ClientesController(), permanent: true);
   VisualizarClientesController visualizarClientesController =
       Get.put(VisualizarClientesController());
+  AgendaController agendaController = Get.put(AgendaController());
 
   @override
   void initState() {
@@ -77,6 +79,7 @@ class _ClientesState extends State<Clientes> {
 
   void _configurandoModalBottomSheet(
       context,
+      String idcliente,
       String nomecliente,
       String endereco,
       String tel,
@@ -392,42 +395,44 @@ class _ClientesState extends State<Clientes> {
                         height: 10,
                       ),
                       statuscliente == 'ABERTO'
-                          ? 
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: ButtonTheme(
-                          height: 50.0,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
-                                  return Colors.white;
-                                },
+                          ? Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: ButtonTheme(
+                                height: 50.0,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty
+                                        .resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                        return Colors.white;
+                                      },
+                                    ),
+                                    shape: MaterialStateProperty.resolveWith<
+                                        OutlinedBorder>(
+                                      (Set<MaterialState> states) {
+                                        return RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    agendaController.idcliente.value =
+                                        idcliente;
+                                    Navigator.of(context).pop();
+                                    Get.toNamed('/agendar_visitas');
+                                  },
+                                  child: Text(
+                                    'Agendar Visitas',
+                                    style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              shape: MaterialStateProperty.resolveWith<
-                                  OutlinedBorder>(
-                                (Set<MaterialState> states) {
-                                  return RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  );
-                                },
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Get.toNamed('/agendar_visitas');
-                            },
-                            child: Text(
-                              'Agendar Visitas',
-                              style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
+                            )
                           : Container(),
                     ],
                   ),
@@ -571,6 +576,7 @@ class _ClientesState extends State<Clientes> {
 
                                     _configurandoModalBottomSheet(
                                       context,
+                                      search.idcliente,
                                       search.nomecliente,
                                       search.endereco,
                                       search.tel,
@@ -676,6 +682,7 @@ class _ClientesState extends State<Clientes> {
                               clientes.imgfachada;
                           _configurandoModalBottomSheet(
                             context,
+                            clientes.idcliente,
                             clientes.nomecliente,
                             clientes.endereco,
                             clientes.tel,

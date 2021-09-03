@@ -8,14 +8,16 @@ class ApiAgendar {
     LoginController loginController = Get.put(LoginController());
     AgendaController agendaController = Get.put(AgendaController());
 
-  
+    print("peridos: ${agendaController.itemSelecionado.value} ");
 
     return await http.post(
       Uri.https(
           "www.admautopecasbelem.com.br", "login/flutter/agendar_visitas.php"),
       body: {
         'idusu': loginController.idusu.value,
-        'periodo': agendaController.periodo.value,
+        'idcliente': agendaController.idcliente.value,
+        'periodo': agendaController.itemSelecionado.value,
+        'dias': agendaController.diasArray,
       },
     );
   }

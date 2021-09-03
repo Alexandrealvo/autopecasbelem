@@ -1,16 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:apbelem/modules/Agenda/api_agenda.dart';
-import 'package:apbelem/modules/Agenda/mapa_agenda.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class AgendaController extends GetxController {
   var isLoading = true.obs;
   var onSelected = false.obs;
   var periodo = TextEditingController().obs;
-  var dias = ''.obs;
+  var diasArray = [].obs;
   var checkeddom = false.obs;
   var checkedseg = false.obs;
   var checkedter = false.obs;
@@ -18,7 +16,7 @@ class AgendaController extends GetxController {
   var checkedqui = false.obs;
   var checkedsex = false.obs;
   var checkedsab = false.obs;
-
+  var idcliente = ''.obs;
   var firstId = '0'.obs;
   var itemSelecionado = 'Selecione Qtd de'.obs;
 
@@ -41,8 +39,7 @@ class AgendaController extends GetxController {
   ];
 
   getAgendarVisitas() async {
-    List<int> diasArray = [];
-
+    diasArray = [].obs;
     if (checkeddom.value == true) {
       diasArray = diasArray + [0];
     }
@@ -65,9 +62,9 @@ class AgendaController extends GetxController {
       diasArray = diasArray + [6];
     }
 
-    print(diasArray);
+    //print("dias: ${diasArray[0]}");
 
-    if (itemSelecionado.value == 'Selecione Qtd de') {
+    if (itemSelecionado.value == 'Selecione Qtd de' || diasArray[0] == "") {
       return 'vazio';
     } else {
       isLoading(true);
@@ -75,7 +72,7 @@ class AgendaController extends GetxController {
       var dados = json.decode(response.body);
 
       isLoading(false);
-
+      print(dados);
       return dados;
     }
   }

@@ -78,7 +78,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                                   .map((String dropDownStringItem) {
                                 return DropdownMenuItem<String>(
                                   value: dropDownStringItem,
-                                  child: Text("${dropDownStringItem} semanas"),
+                                  child: Text("$dropDownStringItem semanas"),
                                 );
                               }).toList(),
                               onChanged: (String novoItemSelecionado) {
@@ -262,6 +262,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                                 ),
                               ),
                               onPressed: () {
+                                print(agendaController.idcliente.value);
                                 agendaController
                                     .getAgendarVisitas()
                                     .then((value) {
@@ -269,7 +270,7 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                                   if (value == 1) {
                                     edgeAlertWidget(
                                       context,
-                                      'OK!',
+                                      'Agendamentos realizados com Sucesso!',
                                     );
                                   } else if (value == "vazio") {
                                     onAlertButtonPressed(
