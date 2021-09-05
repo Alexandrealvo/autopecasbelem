@@ -24,7 +24,7 @@ class CalendarioController extends GetxController {
   }
 
   agenda() async {
-    
+
     isLoading(true);
 
     var response = await ApiCalendario.getCalendario();
@@ -38,7 +38,7 @@ class CalendarioController extends GetxController {
                 () => [])
             .add(
               MapaEvento(
-                confdata: eventos['confdata'],
+                
                 idcliente: eventos['idcliente'],
                 fantasia: eventos['fantasia'],
                 endereco: eventos['endereco'],
@@ -61,7 +61,7 @@ class CalendarioController extends GetxController {
             );
       }
     }
-
+    print(dados);
     isLoading(false);
   }
 

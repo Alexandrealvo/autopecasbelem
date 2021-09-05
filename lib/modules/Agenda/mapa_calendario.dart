@@ -1,5 +1,5 @@
 class MapaEvento {
-  String confdata;
+  
   String idcliente;
   String fantasia;
   String endereco;
@@ -20,7 +20,7 @@ class MapaEvento {
   String obs;
 
   MapaEvento(
-      {this.confdata,
+      {
       this.idcliente,
       this.fantasia,
       this.endereco,
@@ -41,7 +41,7 @@ class MapaEvento {
       this.obs});
 
   MapaEvento.fromJson(Map<String, dynamic> json) {
-    confdata = json['confdata'];
+    
     idcliente = json['idcliente'];
     fantasia = json['fantasia'];
     endereco = json['endereco'];
@@ -65,7 +65,7 @@ class MapaEvento {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
-    data['confdata'] = this.confdata;
+  
     data['idcliente'] = this.idcliente;
     data['fantasia'] = this.fantasia;
     data['endereco'] = this.endereco;
