@@ -39,6 +39,7 @@ class AgendaController extends GetxController {
   ];
 
   getAgendarVisitas() async {
+    diasArray = [].obs;
     if (checkeddom.value == true) {
       diasArray = diasArray + [0];
     }
@@ -61,10 +62,12 @@ class AgendaController extends GetxController {
       diasArray = diasArray + [6];
     }
 
-    //print("dias: ${diasArray[0]}");
+    print("dias: ${diasArray.length}");
 
-    if (itemSelecionado.value == 'Selecione Qtd de' || diasArray[0] == "") {
-      return 'vazio';
+    if (itemSelecionado.value == 'Selecione Qtd de') {
+      return 'qtdvazio';
+    } else if (diasArray.length == 0) {
+      return 'diasvazio';
     } else {
       isLoading(true);
       var response = await ApiAgendar.agendarVisitas();

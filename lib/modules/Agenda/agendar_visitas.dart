@@ -2,6 +2,7 @@ import 'package:apbelem/modules/Agenda/agenda_controller.dart';
 import 'package:apbelem/utils/alert_button_pressed.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:apbelem/utils/edge_alert.dart';
+import 'package:apbelem/utils/edge_alert_danger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -252,17 +253,20 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                                 agendaController
                                     .getAgendarVisitas()
                                     .then((value) {
-                                  print('valor: $value');
-                                  print(agendaController.diasArray);
-
                                   if (value == 1) {
-                                    edgeAlertWidget(
+                                    print('teste');
+                                    edgeAlertWidgetTop(
                                       context,
-                                      'Agendamentos realizados com Sucesso!',
+                                      'Agendamento Realizado com Sucesso!',
                                     );
-                                  } else if (value == "vazio") {
-                                    onAlertButtonPressed(
-                                        context, 'Algum Campo Vazio!', null);
+                                    Get.offNamed('/visualizar_agenda');
+                                    // Get.toNamed('/visualizar_agenda');
+                                  } else if (value == "qtdvazio") {
+                                    edgeAlertWidgetDangerTop(
+                                        context, 'Selecione Qtd de Semanas!');
+                                  } else if (value == "diasvazio") {
+                                    edgeAlertWidgetDangerTop(context,
+                                        'Selecione pelo menos um dia da semana!');
                                   } else {
                                     onAlertButtonPressed(
                                         context,

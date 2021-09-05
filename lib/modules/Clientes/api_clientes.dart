@@ -27,8 +27,6 @@ class ApiClientes extends GetxController {
     LoginController loginController = Get.put(LoginController());
     StatusController statusController = Get.put(StatusController());
 
-    print("idcliente: ${clientesController.idcliente.value}");
-    print("niveresp: ${statusController.newDate.value}");
 
     return await http.post(
         Uri.https("www.admautopecasbelem.com.br",

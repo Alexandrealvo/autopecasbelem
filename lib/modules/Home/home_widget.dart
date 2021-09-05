@@ -146,7 +146,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                       ),
                       GestureDetector(
                         onTap: () {
-                         // Get.toNamed('/convites');
+                         Get.toNamed('/visualizar_agenda');
                         },
                         child: Container(
                              decoration: BoxDecoration(

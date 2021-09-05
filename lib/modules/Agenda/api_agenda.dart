@@ -8,7 +8,7 @@ class ApiAgendar {
     LoginController loginController = Get.put(LoginController());
     AgendaController agendaController = Get.put(AgendaController());
 
-    print("peridos: ${agendaController.itemSelecionado.value} ");
+    print("perido: ${agendaController.diasArray.toString()} ");
 
     return await http.post(
       Uri.https(
