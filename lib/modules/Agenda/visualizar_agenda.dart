@@ -16,7 +16,7 @@ class VisualizarAgenda extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isSameDay(calendarioController.selectedDay.value, date)
-            ? Theme.of(context).buttonColor
+            ? Colors.blue[800]
             : Theme.of(context).accentColor,
       ),
       width: 18.0,
@@ -71,7 +71,7 @@ class VisualizarAgenda extends StatelessWidget {
                         padding: EdgeInsets.all(5),
                         child: TableCalendar(
                           locale: 'pt_BR',
-                          firstDay: DateTime(2019),
+                          firstDay: DateTime.utc(2021, 08, 01),
                           lastDay: lastday, //DateTime(2030),
                           focusedDay: calendarioController.focusedDay.value,
                           availableGestures: AvailableGestures.all,
@@ -83,7 +83,7 @@ class VisualizarAgenda extends StatelessWidget {
                             formatButtonShowsNext: false,
                             formatButtonDecoration: BoxDecoration(
                               color: Colors.blue,
-                              borderRadius: BorderRadius.circular(5.0),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             formatButtonTextStyle: TextStyle(
                               color: Colors.white,
@@ -172,10 +172,36 @@ class VisualizarAgenda extends StatelessWidget {
                         calendarioController.selectedDay.value,
                       )
                           .map((MapaEvento e) {
+                        print(e.infocheckin);
                         return Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
-                            color: Colors.green,
+                            color: (e.ctlcheckin == "0" &&
+                                        e.ctlcheckout == "0") &&
+                                    (e.infocheckin == "0" &&
+                                        e.infocheckout == "0")
+                                ? Theme.of(context).buttonColor
+                                : (e.ctlcheckin == "1" &&
+                                            e.ctlcheckout == "0") &&
+                                        (e.infocheckin == "0" &&
+                                            e.infocheckout == "0")
+                                    ? Colors.red[400]
+                                    : (e.ctlcheckin == "1" &&
+                                                e.ctlcheckout == "1") &&
+                                            (e.infocheckin == "0" &&
+                                                e.infocheckout == "0")
+                                        ? Colors.green[400]
+                                        : (e.ctlcheckin == "1" &&
+                                                    e.ctlcheckout == "1") &&
+                                                (e.infocheckin == "1" &&
+                                                    e.infocheckout == "0")
+                                            ? Colors.blue[400]
+                                            : (e.ctlcheckin == "1" &&
+                                                        e.ctlcheckout == "1") &&
+                                                    (e.infocheckin == "1" &&
+                                                        e.infocheckout == "1")
+                                                ? Colors.grey
+                                                : Colors.white,
                           ),
                           margin: const EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 4.0),
@@ -188,30 +214,55 @@ class VisualizarAgenda extends StatelessWidget {
                               e.fantasia,
                               style: GoogleFonts.montserrat(
                                 fontSize: 12,
-                                color: Colors.black,
+                                color: Colors.black87,
                               ),
                             ),
                             subtitle: RichText(
                               text: TextSpan(
                                 style: GoogleFonts.montserrat(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                ),
+                                    fontSize: 10, color: Colors.black87),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: '${e.endereco} - hora: ${e.bairro}',
+                                      text:
+                                          '${e.endereco}, ${e.numero} - ${e.bairro}',
                                       style: GoogleFonts.montserrat(
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ),
                             onTap: () {
-                              /* detalhesReservasController.idEve.value =
-                                            e.idevento;
-                                        detalhesReservasController
-                                            .validaUsu.value = e.validausu;
+                              var temp = DateTime.now().toUtc();
+                              var d1 =
+                                  DateTime.utc(temp.year, temp.month, temp.day);
 
-                                        detalhesReservasController.goToDetails(
+                              var data = DateTime.parse(e.dtagenda);
+                              var d2 =
+                                  DateTime.utc(data.year, data.month, data.day);
+
+                              if ((e.ctlcheckin == '0' ||
+                                      e.ctlcheckout == '0') &&
+                                  (d2.compareTo(d1) == 0)) {
+                                print('abre mapa');
+                              } else if ((e.ctlcheckin != '1' ||
+                                      e.ctlcheckout != '1') &&
+                                  d2.compareTo(d1) > 0) {
+                                print('abre page agendar horario');
+                              } else if ((d2.compareTo(d1) < 0) &&
+                                  (e.ctlcheckin == '0' ||
+                                      e.ctlcheckout == '0')) {
+                                print('abre page infocheck');
+                              } else if (d2.compareTo(d1) < 0 &&
+                                  (e.ctlcheckin == '1' &&
+                                      e.ctlcheckout == '1')) {
+                                print('abre page info visita');
+                              } else {
+                                print('abre page info visita');
+                              }
+
+                              //detalhesReservasController.idEve.value = e.idevento;
+                              //detalhesReservasController.validaUsu.value = e.validausu;
+
+                              /* mapacalendarioController.goToDetails(
                                           e.nome,
                                           e.unidade,
                                           e.titulo,

@@ -13,6 +13,7 @@ class MapaEvento {
   String idvisita;
   String checkin;
   String checkout;
+  String ctlcheckin;
   String ctlcheckout;
   String dtagenda;
   String infocheckin;
@@ -34,6 +35,7 @@ class MapaEvento {
       this.idvisita,
       this.checkin,
       this.checkout,
+      this.ctlcheckin,
       this.ctlcheckout,
       this.dtagenda,
       this.infocheckin,
@@ -55,6 +57,7 @@ class MapaEvento {
     idvisita = json['idvisita'];
     checkin = json['checkin'];
     checkout = json['checkout'];
+    ctlcheckin = json['ctlcheckin'];
     ctlcheckout = json['ctlcheckout'];
     dtagenda = json['dtagenda'];
     infocheckin = json['infocheckin'];
@@ -79,7 +82,8 @@ class MapaEvento {
     data['idvisita'] = this.idvisita;
     data['checkin'] = this.checkin;
     data['checkout'] = this.checkout;
-    data['ctlcheckout'] = this.ctlcheckout;
+    data['ctlcheckin'] = this.ctlcheckin;
+     data['ctlcheckout'] = this.ctlcheckout;
     data['dtagenda'] = this.dtagenda;
     data['infocheckin'] = this.infocheckin;
     data['infocheckout'] = this.infocheckout;

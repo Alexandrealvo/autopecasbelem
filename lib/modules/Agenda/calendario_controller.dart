@@ -32,7 +32,7 @@ class CalendarioController extends GetxController {
     var dados = json.decode(response.body);
 
     if (dados != 0) {
-      for (var eventos in dados['dados']) {
+      for (var eventos in dados) {
         events
             .putIfAbsent(DateTime.parse('${eventos['dtagenda']} 00:00:00.000Z'),
                 () => [])
@@ -52,6 +52,7 @@ class CalendarioController extends GetxController {
                 idvisita: eventos['idvisita'],
                 checkin: eventos['checkin'],
                 checkout: eventos['checkout'],
+                ctlcheckin: eventos['ctlcheckin'],
                 ctlcheckout: eventos['ctlcheckout'],
                 dtagenda: eventos['dtagenda'],
                 infocheckin: eventos['infocheckin'],
