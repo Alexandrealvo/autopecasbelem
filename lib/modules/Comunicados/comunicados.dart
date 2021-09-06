@@ -57,7 +57,14 @@ class Comunicados extends StatelessWidget {
                                         .comunicados[index];
 
                                     return GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        comunicadosController.title.value =
+                                            comunicados.titulo;
+                                        comunicadosController.description
+                                            .value = comunicados.descricao;
+
+                                        Get.toNamed('/detalhesComunicados');
+                                      },
                                       child: Card(
                                         shape: RoundedRectangleBorder(
                                           borderRadius:

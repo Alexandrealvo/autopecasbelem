@@ -4,6 +4,7 @@ import 'package:apbelem/modules/Chamadas/chamadas.dart';
 import 'package:apbelem/modules/Chamadas/status_cliente.dart';
 import 'package:apbelem/modules/Clientes/clientes.dart';
 import 'package:apbelem/modules/Clientes/dadosresponsavel.dart';
+import 'package:apbelem/modules/Comunicados/components/detalhes_comunicados_page.dart';
 import 'package:apbelem/modules/Comunicados/comunicados.dart';
 import 'package:apbelem/modules/Esqueci/esqueci_senha.dart';
 import 'package:apbelem/modules/Home/home_page.dart';
@@ -61,7 +62,7 @@ void main() {
         name: '/esqueci',
         page: () => Esqueci(),
       ),
-       GetPage(
+      GetPage(
         name: '/clientes',
         page: () => Clientes(),
       ),
@@ -69,17 +70,21 @@ void main() {
         name: '/dadosresp',
         page: () => DadosResp(),
       ),
-       GetPage(
+      GetPage(
         name: '/agendar_visitas',
         page: () => AgendarVisitas(),
       ),
-       GetPage(
+      GetPage(
         name: '/visualizar_agenda',
         page: () => VisualizarAgenda(),
       ),
       GetPage(
         name: '/comunicados',
         page: () => Comunicados(),
+      ),
+      GetPage(
+        name: '/detalhesComunicados',
+        page: () => DetalhesComunicadosPage(),
       ),
     ],
   ));
