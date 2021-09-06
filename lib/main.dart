@@ -4,6 +4,7 @@ import 'package:apbelem/modules/Chamadas/chamadas.dart';
 import 'package:apbelem/modules/Chamadas/status_cliente.dart';
 import 'package:apbelem/modules/Clientes/clientes.dart';
 import 'package:apbelem/modules/Clientes/dadosresponsavel.dart';
+import 'package:apbelem/modules/Comunicados/comunicados.dart';
 import 'package:apbelem/modules/Esqueci/esqueci_senha.dart';
 import 'package:apbelem/modules/Home/home_page.dart';
 import 'package:apbelem/modules/Mapa/mapa_cliente.dart';
@@ -75,6 +76,10 @@ void main() {
        GetPage(
         name: '/visualizar_agenda',
         page: () => VisualizarAgenda(),
+      ),
+      GetPage(
+        name: '/comunicados',
+        page: () => Comunicados(),
       ),
     ],
   ));

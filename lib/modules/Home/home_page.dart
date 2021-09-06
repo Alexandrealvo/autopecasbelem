@@ -429,7 +429,7 @@ class _HomePageState extends State<HomePage> {
                             size: 22,
                           ),
                           onTap: () {
-                            Get.toNamed('/sobre');
+                            Get.toNamed('/comunicados');
                           },
                         ),
                       ),
