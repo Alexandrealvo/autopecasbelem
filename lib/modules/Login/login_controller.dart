@@ -15,15 +15,14 @@ class LoginController extends GetxController {
   var birthdate = ''.obs;
   var genero = ''.obs;
 
- RefreshController refreshController =
+  RefreshController refreshController =
       RefreshController(initialRefresh: false);
   var isLoading = false.obs;
-
 
   void onLoading() async {
     refreshController.loadComplete();
   }
-  
+
   Future<void> launched;
 
   login() async {
@@ -38,8 +37,6 @@ class LoginController extends GetxController {
     isLoading(false);
 
     var dadosUsuario = json.decode(response.body);
-
-    print(dadosUsuario);
 
     if (dadosUsuario['valida'] == 1) {
       return dadosUsuario;

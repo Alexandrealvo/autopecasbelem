@@ -1,11 +1,16 @@
+import 'package:apbelem/modules/Comunicados/comunicados_controller.dart';
+import 'package:apbelem/utils/box_search.dart';
+import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class Comunicados extends StatelessWidget {
-  //const Comunicados({ Key? key }) : super(key: key);
+  final ComunicadosController comunicadosController =
+      Get.put(ComunicadosController());
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -25,14 +30,111 @@ class Comunicados extends StatelessWidget {
                 ? CircularProgressIndicatorWidget()
                 : Column(
                     children: [
-                      boxSearch(
-                          context,
-                          comunicadosController.search.value,
-                          comunicadosController.onSearchTextChanged,
-                          "Pesquise os Comunicados..."),
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        child: boxSearch(
+                            context,
+                            comunicadosController.search.value,
+                            comunicadosController.onSearchTextChanged,
+                            "Pesquise os Comunicados..."),
+                      ),
                       Expanded(
-                        child: _listacomunicados(),
-                      )
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: ListView(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(bottom: 30),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                height: MediaQuery.of(context).size.height,
+                                child: ListView.builder(
+                                  itemCount:
+                                      comunicadosController.comunicados.length,
+                                  itemBuilder: (context, index) {
+                                    var comunicados = comunicadosController
+                                        .comunicados[index];
+
+                                    return GestureDetector(
+                                      onTap: () {},
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        color: Theme.of(context).accentColor,
+                                        child: ListTile(
+                                          leading: RichText(
+                                            text: TextSpan(
+                                              style: GoogleFonts.montserrat(
+                                                  fontSize: 12,
+                                                  color: Theme.of(context)
+                                                      .textSelectionTheme
+                                                      .selectionColor),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: comunicados.dia +
+                                                        "  ",
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                TextSpan(
+                                                  text: comunicados.mes + ' ',
+                                                  style: GoogleFonts.montserrat(
+                                                      fontSize: 14,
+                                                      color: Theme.of(context)
+                                                          .textSelectionTheme
+                                                          .selectionColor,
+                                                      letterSpacing: 2),
+                                                ),
+                                                TextSpan(
+                                                  text: comunicados.ano + ' ',
+                                                  style: GoogleFonts.montserrat(
+                                                      fontSize: 14,
+                                                      color: Theme.of(context)
+                                                          .textSelectionTheme
+                                                          .selectionColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          title: Container(
+                                            child: Center(
+                                              child: Text(
+                                                comunicados.titulo,
+                                                style: GoogleFonts.montserrat(
+                                                    fontSize: 12,
+                                                    color: Theme.of(context)
+                                                        .textSelectionTheme
+                                                        .selectionColor,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                          trailing: Icon(
+                                            Icons.arrow_right,
+                                            color: Theme.of(context)
+                                                .textSelectionTheme
+                                                .selectionColor,
+                                            size: 26,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   );
           },
@@ -41,4 +143,3 @@ class Comunicados extends StatelessWidget {
     );
   }
 }
-

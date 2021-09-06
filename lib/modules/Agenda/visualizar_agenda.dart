@@ -7,8 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class VisualizarAgenda extends StatelessWidget {
+  final CalendarioController calendarioController =
+      Get.put(CalendarioController());
   //const VisualizarAgenda ({ Key? key }) : super(key: key);
-  CalendarioController calendarioController = Get.put(CalendarioController());
 
   Widget buildEventsMarker(context, DateTime date, List events) {
     return AnimatedContainer(
