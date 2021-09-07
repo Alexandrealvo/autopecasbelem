@@ -247,7 +247,8 @@ class VisualizarAgenda extends StatelessWidget {
                               } else if ((e.ctlcheckin != '1' ||
                                       e.ctlcheckout != '1') &&
                                   d2.compareTo(d1) > 0) {
-                                print('abre page agendar horario');
+                                
+                                Get.toNamed('/agendarhorario');
                               } else if ((d2.compareTo(d1) < 0) &&
                                   (e.ctlcheckin == '0' ||
                                       e.ctlcheckout == '0')) {
