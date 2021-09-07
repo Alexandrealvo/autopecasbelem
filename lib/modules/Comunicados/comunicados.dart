@@ -4,7 +4,6 @@ import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class Comunicados extends StatelessWidget {
   final ComunicadosController comunicadosController =

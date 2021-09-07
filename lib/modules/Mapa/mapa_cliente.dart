@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:apbelem/modules/Clientes/clientes_controller.dart';
+import 'package:apbelem/modules/Mapa/mapa_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,75 +13,72 @@ class MapaCliente extends StatefulWidget {
 }
 
 class MapaClienteState extends State<MapaCliente> {
+  MapaController mapaController = Get.put(MapaController());
   ClientesController clientesController = Get.put(ClientesController());
   Completer<GoogleMapController> _controller = Completer();
   bool isLoading = true;
   BitmapDescriptor pinLocationIcon;
-  Set<Marker> _markers = {};
-
-  @override
-  void initState() {
-    super.initState();
-     _getClientes();
-   // setCustomMapPin();
-  }
+  // Set<Marker> _markers = {};
 
   void setCustomMapPin() async {
     pinLocationIcon = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5), 'images/clientes.png');
   }
 
-  _getClientes() {
-    _markers.add(Marker(
-        markerId: MarkerId(clientesController.nomecliente.value),
-        position: LatLng(double.parse(clientesController.lat.value),
-            double.parse(clientesController.lng.value)),
-        infoWindow: InfoWindow(
-          title: clientesController.nomecliente.value,
-          snippet: "${clientesController.endereco.value}",
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-          BitmapDescriptor.hueViolet,
-        )));
-    isLoading = false;
-  }
+  // _getClientes() {
+  //   _markers.add(Marker(
+  //       markerId: MarkerId(clientesController.nomecliente.value),
+  //       position: LatLng(double.parse(clientesController.lat.value),
+  //           double.parse(clientesController.lng.value)),
+  //       infoWindow: InfoWindow(
+  //         title: clientesController.nomecliente.value,
+  //         snippet: "${clientesController.endereco.value}",
+  //       ),
+  //       icon: BitmapDescriptor.defaultMarkerWithHue(
+  //         BitmapDescriptor.hueViolet,
+  //       )));
+  //   isLoading = false;
+  // }
 
   double zoomVal = 5.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Localização Cliente',
-          style: GoogleFonts.montserrat(
-            fontSize: 16,
-            color: Theme.of(context).textSelectionTheme.selectionColor,
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: isLoading
-          ? Container(
-              height: MediaQuery.of(context).size.height,
-              color: Colors.black,
-              child: Center(
-                child: SizedBox(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 4,
-                    valueColor: AlwaysStoppedAnimation(Colors.red[900]),
-                  ),
-                  height: 40,
-                  width: 40,
-                ),
-              ),
-            )
-          : Stack(
-              children: <Widget>[
-                _buildGoogleMap(context),
-                _buildContainer(),
-              ],
+        appBar: AppBar(
+          title: Text(
+            'Localização Cliente',
+            style: GoogleFonts.montserrat(
+              fontSize: 16,
+              color: Theme.of(context).textSelectionTheme.selectionColor,
             ),
-    );
+          ),
+          centerTitle: true,
+        ),
+        body: Obx(
+          () {
+            return mapaController.isLoading.value
+                ? Container(
+                    height: MediaQuery.of(context).size.height,
+                    color: Colors.black,
+                    child: Center(
+                      child: SizedBox(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 4,
+                          valueColor: AlwaysStoppedAnimation(Colors.red[900]),
+                        ),
+                        height: 40,
+                        width: 40,
+                      ),
+                    ),
+                  )
+                : Stack(
+                    children: <Widget>[
+                      _buildGoogleMap(context),
+                      _buildContainer(),
+                    ],
+                  );
+          },
+        ));
   }
 
   changeMapMode() {
@@ -210,7 +208,7 @@ class MapaClienteState extends State<MapaCliente> {
             } else {}
             changeMapMode();
           },
-          markers: _markers,
+          markers: mapaController.markers,
         ));
   }
 
