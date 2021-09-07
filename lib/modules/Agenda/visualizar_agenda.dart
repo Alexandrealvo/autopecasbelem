@@ -247,6 +247,9 @@ class VisualizarAgenda extends StatelessWidget {
                               mapaAgendaController.uf.value = e.uf;
                               mapaAgendaController.city.value = e.cidade;
                               mapaAgendaController.number.value = e.numero;
+                              mapaAgendaController.ctlcheckin.value =
+                                  e.ctlcheckin;
+                              mapaAgendaController.idVisita.value = e.idvisita;
 
                               var temp = DateTime.now().toUtc();
                               var d1 =
@@ -264,7 +267,6 @@ class VisualizarAgenda extends StatelessWidget {
                               } else if ((e.ctlcheckin != '1' ||
                                       e.ctlcheckout != '1') &&
                                   d2.compareTo(d1) > 0) {
-                                
                                 Get.toNamed('/agendarhorario');
                               } else if ((d2.compareTo(d1) < 0) &&
                                   (e.ctlcheckin == '0' ||

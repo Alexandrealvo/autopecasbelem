@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:apbelem/modules/MapaAgenda/mapa_agenda_repository.dart';
+import 'package:apbelem/utils/alert_button_pressed.dart';
+import 'package:apbelem/utils/confirmed_button_pressed.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -7,17 +12,21 @@ class MapaAgendaController extends GetxController {
 
   var lat = 0.0.obs;
   var lng = 0.0.obs;
+  var ourLat = 0.0.obs;
+  var ourLng = 0.0.obs;
   var name = ''.obs;
   var adress = ''.obs;
   var district = ''.obs;
   var city = ''.obs;
   var uf = ''.obs;
   var number = ''.obs;
+  var ctlcheckin = ''.obs;
+  var idVisita = ''.obs;
 
   var markers = <Marker>{}.obs;
 
   getClientes() async {
-    markers.add(
+    markers.assign(
       Marker(
         markerId: MarkerId(name.value),
         position: LatLng(lat.value, lng.value),
@@ -30,5 +39,33 @@ class MapaAgendaController extends GetxController {
       ),
     );
     isLoading(false);
+  }
+
+  doCheckIn(context) async {
+    final response = await MapaAgendaRepository.doCheckin();
+
+    var dados = json.decode(response.body);
+
+    if (dados['valida'] == 0) {
+      onAlertButtonPressed(
+          context, 'Algo deu errado, tente novamente', '/home');
+    } else {
+      confirmedButtonPressed(
+          context, 'Check-in realizado com sucesso!', '/home');
+    }
+  }
+
+  doCheckout(context) async {
+    final response = await MapaAgendaRepository.doCheckin();
+
+    var dados = json.decode(response.body);
+
+    if (dados['valida'] == 0) {
+      onAlertButtonPressed(
+          context, 'Algo deu errado, tente novamente', '/home');
+    } else {
+      confirmedButtonPressed(
+          context, 'Check-out realizado com sucesso!', '/home');
+    }
   }
 }
