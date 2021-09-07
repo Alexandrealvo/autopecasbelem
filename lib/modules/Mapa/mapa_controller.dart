@@ -23,6 +23,7 @@ class MapaController extends GetxController {
             ImageConfiguration(size: Size(48, 48)), 'images/cliente.png'),
       ),
     );
+    print(markers);
     isLoading(false);
   }
 

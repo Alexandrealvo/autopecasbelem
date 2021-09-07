@@ -18,27 +18,11 @@ class MapaClienteState extends State<MapaCliente> {
   Completer<GoogleMapController> _controller = Completer();
   bool isLoading = true;
   BitmapDescriptor pinLocationIcon;
-  // Set<Marker> _markers = {};
 
   void setCustomMapPin() async {
     pinLocationIcon = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5), 'images/clientes.png');
   }
-
-  // _getClientes() {
-  //   _markers.add(Marker(
-  //       markerId: MarkerId(clientesController.nomecliente.value),
-  //       position: LatLng(double.parse(clientesController.lat.value),
-  //           double.parse(clientesController.lng.value)),
-  //       infoWindow: InfoWindow(
-  //         title: clientesController.nomecliente.value,
-  //         snippet: "${clientesController.endereco.value}",
-  //       ),
-  //       icon: BitmapDescriptor.defaultMarkerWithHue(
-  //         BitmapDescriptor.hueViolet,
-  //       )));
-  //   isLoading = false;
-  // }
 
   double zoomVal = 5.0;
   @override

@@ -1,5 +1,6 @@
 import 'package:apbelem/modules/Agenda/calendario_controller.dart';
 import 'package:apbelem/modules/Agenda/mapa_calendario.dart';
+import 'package:apbelem/modules/MapaAgenda/mapa_agenda_controller.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ import 'package:table_calendar/table_calendar.dart';
 class VisualizarAgenda extends StatelessWidget {
   final CalendarioController calendarioController =
       Get.put(CalendarioController());
+  final MapaAgendaController mapaAgendaController =
+      Get.put(MapaAgendaController());
   //const VisualizarAgenda ({ Key? key }) : super(key: key);
 
   Widget buildEventsMarker(context, DateTime date, List events) {
@@ -232,6 +235,19 @@ class VisualizarAgenda extends StatelessWidget {
                               ),
                             ),
                             onTap: () {
+                              var latLng = e.latlng.split(',');
+                              var lat = double.parse(latLng[0]);
+                              var lng = double.parse(latLng[1]);
+
+                              mapaAgendaController.lat.value = lat;
+                              mapaAgendaController.lng.value = lng;
+                              mapaAgendaController.name.value = e.fantasia;
+                              mapaAgendaController.adress.value = e.endereco;
+                              mapaAgendaController.district.value = e.bairro;
+                              mapaAgendaController.uf.value = e.uf;
+                              mapaAgendaController.city.value = e.cidade;
+                              mapaAgendaController.number.value = e.numero;
+
                               var temp = DateTime.now().toUtc();
                               var d1 =
                                   DateTime.utc(temp.year, temp.month, temp.day);
@@ -243,7 +259,8 @@ class VisualizarAgenda extends StatelessWidget {
                               if ((e.ctlcheckin == '0' ||
                                       e.ctlcheckout == '0') &&
                                   (d2.compareTo(d1) == 0)) {
-                                print('abre mapa');
+                                mapaAgendaController.getClientes();
+                                Get.toNamed('/mapaAgenda');
                               } else if ((e.ctlcheckin != '1' ||
                                       e.ctlcheckout != '1') &&
                                   d2.compareTo(d1) > 0) {

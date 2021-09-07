@@ -10,6 +10,7 @@ import 'package:apbelem/modules/Comunicados/comunicados.dart';
 import 'package:apbelem/modules/Esqueci/esqueci_senha.dart';
 import 'package:apbelem/modules/Home/home_page.dart';
 import 'package:apbelem/modules/Mapa/mapa_cliente.dart';
+import 'package:apbelem/modules/MapaAgenda/mapa_agenda_page.dart';
 import 'package:apbelem/modules/Perfil/perfil.dart';
 import 'package:apbelem/modules/Senha/senha.dart';
 import 'package:apbelem/theme/theme.dart';
@@ -87,9 +88,15 @@ void main() {
         name: '/detalhesComunicados',
         page: () => DetalhesComunicadosPage(),
       ),
+<<<<<<< HEAD
        GetPage(
         name: '/agendarhorario',
         page: () => AgendarHorario(),
+=======
+      GetPage(
+        name: '/mapaAgenda',
+        page: () => MapaAgendaPage(),
+>>>>>>> e1e8f0b94f233c488f069cd29d38017daa6b791f
       ),
     ],
   ));

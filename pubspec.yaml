@@ -17,6 +17,7 @@ dependencies:
     sdk: flutter
   flutter_open_whatsapp: ^0.1.2
   font_awesome_flutter: ^9.1.0
+  geolocator: ^7.6.0
   get: ^4.1.4
   get_storage: null
   google_fonts: ^2.1.0
