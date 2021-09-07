@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:apbelem/modules/Chamadas/chamadas_controller.dart';
+import 'package:apbelem/modules/Clientes/clientes_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ class MapaCliente extends StatefulWidget {
 }
 
 class MapaClienteState extends State<MapaCliente> {
-  ChamadasController chamadasController = Get.put(ChamadasController());
+  ClientesController clientesController = Get.put(ClientesController());
   Completer<GoogleMapController> _controller = Completer();
   bool isLoading = true;
   BitmapDescriptor pinLocationIcon;
@@ -32,12 +32,12 @@ class MapaClienteState extends State<MapaCliente> {
 
   _getClientes() {
     _markers.add(Marker(
-        markerId: MarkerId(chamadasController.nomecliente.value),
-        position: LatLng(double.parse(chamadasController.lat.value),
-            double.parse(chamadasController.lng.value)),
+        markerId: MarkerId(clientesController.nomecliente.value),
+        position: LatLng(double.parse(clientesController.lat.value),
+            double.parse(clientesController.lng.value)),
         infoWindow: InfoWindow(
-          title: chamadasController.nomecliente.value,
-          snippet: "${chamadasController.endereco.value}",
+          title: clientesController.nomecliente.value,
+          snippet: "${clientesController.endereco.value}",
         ),
         icon: BitmapDescriptor.defaultMarkerWithHue(
           BitmapDescriptor.hueViolet,
@@ -109,10 +109,10 @@ class MapaClienteState extends State<MapaCliente> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: _boxes(
-                    double.parse(chamadasController.lat.value),
-                    double.parse(chamadasController.lng.value),
-                    chamadasController.nomecliente.value,
-                    chamadasController.endereco.value,
+                    double.parse(clientesController.lat.value),
+                    double.parse(clientesController.lng.value),
+                    clientesController.nomecliente.value,
+                    clientesController.endereco.value,
                   ),
                 ),
               ],
@@ -201,8 +201,8 @@ class MapaClienteState extends State<MapaCliente> {
           mapToolbarEnabled: true,
           tiltGesturesEnabled: true,
           initialCameraPosition: CameraPosition(
-              target: LatLng(double.parse(chamadasController.lat.value),
-                  double.parse(chamadasController.lng.value)),
+              target: LatLng(double.parse(clientesController.lat.value),
+                  double.parse(clientesController.lng.value)),
               zoom: 14),
           onMapCreated: (GoogleMapController controller) {
             if (!_controller.isCompleted) {
