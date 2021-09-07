@@ -9,6 +9,7 @@ import 'package:apbelem/modules/Comunicados/comunicados.dart';
 import 'package:apbelem/modules/Esqueci/esqueci_senha.dart';
 import 'package:apbelem/modules/Home/home_page.dart';
 import 'package:apbelem/modules/Mapa/mapa_cliente.dart';
+import 'package:apbelem/modules/MapaAgenda/mapa_agenda_page.dart';
 import 'package:apbelem/modules/Perfil/perfil.dart';
 import 'package:apbelem/modules/Senha/senha.dart';
 import 'package:apbelem/theme/theme.dart';
@@ -85,6 +86,10 @@ void main() {
       GetPage(
         name: '/detalhesComunicados',
         page: () => DetalhesComunicadosPage(),
+      ),
+      GetPage(
+        name: '/mapaAgenda',
+        page: () => MapaAgendaPage(),
       ),
     ],
   ));
