@@ -88,15 +88,13 @@ void main() {
         name: '/detalhesComunicados',
         page: () => DetalhesComunicadosPage(),
       ),
-<<<<<<< HEAD
        GetPage(
         name: '/agendarhorario',
         page: () => AgendarHorario(),
-=======
+      ),
       GetPage(
         name: '/mapaAgenda',
         page: () => MapaAgendaPage(),
->>>>>>> e1e8f0b94f233c488f069cd29d38017daa6b791f
       ),
     ],
   ));
