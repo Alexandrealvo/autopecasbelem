@@ -146,7 +146,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
           initialCameraPosition: CameraPosition(
               target: LatLng(mapaAgendaController.lat.value,
                   mapaAgendaController.lng.value),
-              zoom: 14),
+              zoom: 16),
           onMapCreated: (GoogleMapController controller) async {
             if (!_controller.isCompleted) {
               _controller.complete(controller);
