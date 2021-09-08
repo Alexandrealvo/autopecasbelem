@@ -83,4 +83,17 @@ class MapaAgendaController extends GetxController {
           context, 'Alteração de GPS realizado com sucesso!', '/home');
     }
   }
+
+  deleteClient(context) async {
+    final response = await MapaAgendaRepository.deleteClient();
+
+    var dados = json.decode(response.body);
+
+    if (dados['valida'] == 0) {
+      onAlertButtonPressed(
+          context, 'Algo deu errado, tente novamente', '/home');
+    } else {
+      confirmedButtonPressed(context, 'Cliente deletado com sucesso!', '/home');
+    }
+  }
 }

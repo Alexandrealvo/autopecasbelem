@@ -301,7 +301,11 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
                     fontSize: 14,
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    deleteAlert(context, "Deseja deletar o cliente?", () async {
+                      await mapaAgendaController.deleteClient(context);
+                    });
+                  },
                 ),
               ],
             )

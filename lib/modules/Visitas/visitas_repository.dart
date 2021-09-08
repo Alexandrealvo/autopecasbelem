@@ -20,13 +20,6 @@ class VisitasRepository {
     LoginController loginController = Get.put(LoginController());
     VisitasController visitasController = Get.put(VisitasController());
 
-    print({
-      loginController.idusu.value,
-      visitasController.firstId.value,
-      visitasController.initialDate.value,
-      visitasController.finalDate.value,
-    });
-
     return await http.post(
       Uri.https("www.admautopecasbelem.com.br",
           "login/flutter/visitas_relatorio.php"),

@@ -31,4 +31,16 @@ class MapaAgendaRepository {
       },
     );
   }
+
+  static Future deleteClient() async {
+    MapaAgendaController mapaAgendaController = Get.put(MapaAgendaController());
+
+    return await http.post(
+      Uri.https(
+          "www.admautopecasbelem.com.br", "login/flutter/visitas_excluir.php"),
+      body: {
+        'idvisita': mapaAgendaController.idVisita.value,
+      },
+    );
+  }
 }
