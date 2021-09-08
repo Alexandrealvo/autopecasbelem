@@ -275,7 +275,9 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
                     fontSize: 14,
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed('/infoCheck');
+                  },
                 ),
                 SpeedDialChild(
                   child: Icon(Icons.replay_circle_filled),
@@ -285,7 +287,11 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
                     fontSize: 14,
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    deleteAlert(context, "Deseja atualizar o GPS?", () async {
+                      await mapaAgendaController.doChangeGps(context);
+                    });
+                  },
                 ),
                 SpeedDialChild(
                   child: Icon(Icons.delete),
@@ -339,7 +345,9 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
                     fontSize: 14,
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed('/infoCheck');
+                  },
                 ),
               ],
             ),

@@ -29,7 +29,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                        Get.toNamed('/chamadas');
+                          Get.toNamed('/chamadas');
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -68,10 +68,10 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                       ),
                       GestureDetector(
                         onTap: () {
-                         Get.toNamed('/clientes');
+                          Get.toNamed('/clientes');
                         },
                         child: Container(
-                             decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Theme.of(context).buttonColor,
                               boxShadow: [
@@ -107,10 +107,10 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          //Get.toNamed('/alvoTv');
+                          Get.toNamed('/dataTableVisitas');
                         },
                         child: Container(
-                             decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Theme.of(context).buttonColor,
                               boxShadow: [
@@ -146,10 +146,10 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                       ),
                       GestureDetector(
                         onTap: () {
-                         Get.toNamed('/visualizar_agenda');
+                          Get.toNamed('/visualizar_agenda');
                         },
                         child: Container(
-                             decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Theme.of(context).buttonColor,
                               boxShadow: [
@@ -188,7 +188,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                           //Get.toNamed('/reserva');
                         },
                         child: Container(
-                             decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Theme.of(context).buttonColor,
                               boxShadow: [
@@ -224,10 +224,10 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                       ),
                       GestureDetector(
                         onTap: () {
-                         // Get.toNamed('/comunicados');
+                          // Get.toNamed('/comunicados');
                         },
                         child: Container(
-                             decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Theme.of(context).buttonColor,
                               boxShadow: [
@@ -261,7 +261,6 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                               ],
                             )),
                       ),
-                      
                     ],
                   ),
                 ),

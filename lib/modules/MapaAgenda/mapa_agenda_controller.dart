@@ -22,6 +22,7 @@ class MapaAgendaController extends GetxController {
   var number = ''.obs;
   var ctlcheckin = ''.obs;
   var idVisita = ''.obs;
+  var idCliente = ''.obs;
 
   var markers = <Marker>{}.obs;
 
@@ -66,6 +67,20 @@ class MapaAgendaController extends GetxController {
     } else {
       confirmedButtonPressed(
           context, 'Check-out realizado com sucesso!', '/home');
+    }
+  }
+
+  doChangeGps(context) async {
+    final response = await MapaAgendaRepository.doChangeGps();
+
+    var dados = json.decode(response.body);
+
+    if (dados['valida'] == 0) {
+      onAlertButtonPressed(
+          context, 'Algo deu errado, tente novamente', '/home');
+    } else {
+      confirmedButtonPressed(
+          context, 'Alteração de GPS realizado com sucesso!', '/home');
     }
   }
 }

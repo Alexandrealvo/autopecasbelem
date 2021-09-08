@@ -8,7 +8,7 @@ class AgendaHorarioController extends GetxController {
   var horaent = TextEditingController().obs;
   var horasai = TextEditingController().obs;
 
-  var HoraMaskFormatter = new MaskTextInputFormatter(
+  var horaMaskFormatter = new MaskTextInputFormatter(
     mask: '##:##',
     filter: {"#": RegExp(r'[0-9]')},
   );

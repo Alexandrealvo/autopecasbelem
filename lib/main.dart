@@ -10,9 +10,12 @@ import 'package:apbelem/modules/Comunicados/comunicados.dart';
 import 'package:apbelem/modules/Esqueci/esqueci_senha.dart';
 import 'package:apbelem/modules/Home/home_page.dart';
 import 'package:apbelem/modules/Mapa/mapa_cliente.dart';
+import 'package:apbelem/modules/MapaAgenda/components/info_check_page.dart';
 import 'package:apbelem/modules/MapaAgenda/mapa_agenda_page.dart';
 import 'package:apbelem/modules/Perfil/perfil.dart';
 import 'package:apbelem/modules/Senha/senha.dart';
+import 'package:apbelem/modules/Visitas/data_table_visitas_page.dart';
+import 'package:apbelem/modules/Visitas/visitas_page.dart';
 import 'package:apbelem/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -88,13 +91,25 @@ void main() {
         name: '/detalhesComunicados',
         page: () => DetalhesComunicadosPage(),
       ),
-       GetPage(
+      GetPage(
         name: '/agendarhorario',
         page: () => AgendarHorario(),
       ),
       GetPage(
         name: '/mapaAgenda',
         page: () => MapaAgendaPage(),
+      ),
+      GetPage(
+        name: '/infoCheck',
+        page: () => InfoCheckPage(),
+      ),
+      GetPage(
+        name: '/visitas',
+        page: () => VisitasPage(),
+      ),
+      GetPage(
+        name: '/dataTableVisitas',
+        page: () => DataTableVisitas(),
       ),
     ],
   ));

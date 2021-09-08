@@ -6,15 +6,6 @@ class MapaAgendaRepository {
   static Future doCheckin() async {
     MapaAgendaController mapaAgendaController = Get.put(MapaAgendaController());
 
-    print({
-      mapaAgendaController.idVisita.value,
-      mapaAgendaController.lat.value.toString(),
-      mapaAgendaController.lng.value.toString(),
-      mapaAgendaController.ctlcheckin.value,
-      mapaAgendaController.ourLat.value.toString(),
-      mapaAgendaController.ourLng.value.toString()
-    });
-
     return await http.post(
       Uri.https("www.admautopecasbelem.com.br", "/login/flutter/check.php"),
       body: {
@@ -24,6 +15,19 @@ class MapaAgendaRepository {
         'latcliente': mapaAgendaController.lat.value.toString(),
         'lngcliente': mapaAgendaController.lng.value.toString(),
         'ctlcheckin': mapaAgendaController.ctlcheckin.value,
+      },
+    );
+  }
+
+  static Future doChangeGps() async {
+    MapaAgendaController mapaAgendaController = Get.put(MapaAgendaController());
+
+    return await http.post(
+      Uri.https("www.admautopecasbelem.com.br", "login/flutter/alterargps.php"),
+      body: {
+        'idcliente': mapaAgendaController.idCliente.value,
+        'lat': mapaAgendaController.ourLat.value.toString(),
+        'lng': mapaAgendaController.ourLng.value.toString(),
       },
     );
   }

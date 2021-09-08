@@ -250,6 +250,8 @@ class VisualizarAgenda extends StatelessWidget {
                               mapaAgendaController.ctlcheckin.value =
                                   e.ctlcheckin;
                               mapaAgendaController.idVisita.value = e.idvisita;
+                              mapaAgendaController.idCliente.value =
+                                  e.idcliente;
 
                               var temp = DateTime.now().toUtc();
                               var d1 =

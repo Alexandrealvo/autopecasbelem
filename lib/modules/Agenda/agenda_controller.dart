@@ -80,8 +80,6 @@ class AgendaController extends GetxController {
 
   @override
   void onInit() {
-    // init();
-    // agendaReservas();
     super.onInit();
     isLoading(false);
   }

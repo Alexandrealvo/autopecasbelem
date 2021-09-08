@@ -1,13 +1,17 @@
-import 'package:apbelem/modules/AgendarHorario/agendarhorario.controller.dart';
+import 'package:apbelem/modules/MapaAgenda/components/info_check_controller.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AgendarHorario extends StatelessWidget {
-  //const AgendarHorario({ Key? key }) : super(key: key);
-  final AgendaHorarioController agendahorarioController =
-      Get.put(AgendaHorarioController());
+import '../mapa_agenda_controller.dart';
+
+class InfoCheckPage extends StatelessWidget {
+  final InfoCheckController infoCheckController =
+      Get.put(InfoCheckController());
+  final MapaAgendaController mapaAgendaController =
+      Get.put(MapaAgendaController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +27,7 @@ class AgendarHorario extends StatelessWidget {
             centerTitle: true,
           ),
           body: Obx(() {
-            return agendahorarioController.isLoading.value
+            return infoCheckController.isLoading.value
                 ? CircularProgressIndicatorWidget()
                 : SingleChildScrollView(
                     child: Container(
@@ -36,10 +40,8 @@ class AgendarHorario extends StatelessWidget {
                         children: [
                           TextField(
                             keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              agendahorarioController.horaMaskFormatter
-                            ],
-                            controller: agendahorarioController.horaent.value,
+                            inputFormatters: [infoCheckController.maskHour],
+                            controller: infoCheckController.hour.value,
                             style: GoogleFonts.montserrat(
                               fontSize: 14,
                               color: Theme.of(context)
@@ -56,58 +58,10 @@ class AgendarHorario extends StatelessWidget {
                                   width: 1,
                                 ),
                               ),
-                              labelText: 'Hora Entrada',
-                              labelStyle: GoogleFonts.montserrat(
-                                fontSize: 14,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
-                              ),
-                              isDense: true,
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 2,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              agendahorarioController.horaMaskFormatter
-                            ],
-                            controller: agendahorarioController.horaent.value,
-                            style: GoogleFonts.montserrat(
-                              fontSize: 14,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor,
-                            ),
-                            decoration: InputDecoration(
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 1,
-                                ),
-                              ),
-                              labelText: 'Hora Entrada',
+                              labelText:
+                                  mapaAgendaController.ctlcheckin.value == '0'
+                                      ? 'Hora Entrada'
+                                      : 'Hora Saída',
                               labelStyle: GoogleFonts.montserrat(
                                 fontSize: 14,
                                 color: Theme.of(context)
@@ -157,32 +111,8 @@ class AgendarHorario extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              onPressed: () {
-                                /* print(agendaController.idcliente.value);
-                                agendaController
-                                    .getAgendarVisitas()
-                                    .then((value) {
-                                  if (value == 1) {
-                                    print('teste');
-                                    edgeAlertWidgetTop(
-                                      context,
-                                      'Agendamento Realizado com Sucesso!',
-                                    );
-                                    Get.offNamed('/visualizar_agenda');
-                                    // Get.toNamed('/visualizar_agenda');
-                                  } else if (value == "qtdvazio") {
-                                    edgeAlertWidgetDangerTop(
-                                        context, 'Selecione Qtd de Semanas!');
-                                  } else if (value == "diasvazio") {
-                                    edgeAlertWidgetDangerTop(context,
-                                        'Selecione pelo menos um dia da semana!');
-                                  } else {
-                                    onAlertButtonPressed(
-                                        context,
-                                        'Algo deu errado\n Tente novamente',
-                                        null);
-                                  }
-                                });*/
+                              onPressed: () async {
+                                await infoCheckController.changeHours(context);
                               },
                               child: Text(
                                 "Incluir Horário",
