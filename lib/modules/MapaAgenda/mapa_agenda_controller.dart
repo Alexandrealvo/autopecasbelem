@@ -49,11 +49,15 @@ class MapaAgendaController extends GetxController {
 
     if (dados['valida'] == 0) {
       onAlertButtonPressed(
-          context, 'Algo deu errado, tente novamente', '/home');
-    } else {
+        context, 'Cliente Fora do Raio de Check-in!', '/home');
+    } else if (dados['valida'] == 1) {
       confirmedButtonPressed(
           context, 'Check-in realizado com sucesso!', '/home');
+    } else {
+      onAlertButtonPressed(
+          context, 'Houve Algum Problema! Tente Novamente', '/home');
     }
+
   }
 
   doCheckout(context) async {
@@ -93,7 +97,7 @@ class MapaAgendaController extends GetxController {
       onAlertButtonPressed(
           context, 'Algo deu errado, tente novamente', '/home');
     } else {
-      confirmedButtonPressed(context, 'Cliente deletado com sucesso!', '/home');
+      confirmedButtonPressed(context, 'Visita Deletada com Sucesso!', '/home');
     }
   }
 }

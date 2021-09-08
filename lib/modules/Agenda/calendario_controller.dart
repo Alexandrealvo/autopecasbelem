@@ -53,6 +53,7 @@ class CalendarioController extends GetxController {
                 ctlcheckin: eventos['ctlcheckin'],
                 ctlcheckout: eventos['ctlcheckout'],
                 dtagenda: eventos['dtagenda'],
+                hragenda: eventos['hragenda'],
                 infocheckin: eventos['infocheckin'],
                 infocheckout: eventos['infocheckout'],
                 obs: eventos['obs'],

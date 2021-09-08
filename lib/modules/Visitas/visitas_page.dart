@@ -1,7 +1,6 @@
 import 'package:apbelem/modules/Visitas/visitas_controller.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:apbelem/utils/custom_text_field.dart';
-import 'package:apbelem/utils/delete_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -140,6 +139,7 @@ class _VisitasPageState extends State<VisitasPage> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 15),
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 5,
@@ -155,6 +155,7 @@ class _VisitasPageState extends State<VisitasPage> {
                             ),
                           ),
                         ),
+                        
                         Container(
                           child: GestureDetector(
                             onTap: () async {
@@ -185,6 +186,7 @@ class _VisitasPageState extends State<VisitasPage> {
                             ),
                           ),
                         ),
+                         SizedBox(height: 15),
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 5,
@@ -265,7 +267,7 @@ class _VisitasPageState extends State<VisitasPage> {
                               await visitasController.doRelatorios();
                             },
                             child: Text(
-                              "Incluir Horário",
+                              "Enviar",
                               style: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context)
@@ -275,46 +277,7 @@ class _VisitasPageState extends State<VisitasPage> {
                             ),
                           ),
                         ),
-                        visitasController.firstId.value == '0'
-                            ? Container()
-                            : ButtonTheme(
-                                height: 50.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty
-                                        .resolveWith<Color>(
-                                      (Set<MaterialState> states) {
-                                        return Theme.of(context).errorColor;
-                                      },
-                                    ),
-                                    shape: MaterialStateProperty.resolveWith<
-                                        OutlinedBorder>(
-                                      (Set<MaterialState> states) {
-                                        return RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  onPressed: () async {
-                                    deleteAlert(
-                                      context,
-                                      'Deseja deletar o cliente?',
-                                      () {},
-                                    );
-                                  },
-                                  child: Text(
-                                    "Deletar Cliente",
-                                    style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor,
-                                    ),
-                                  ),
-                                ),
-                              )
+                       
                       ],
                     ),
                   ),

@@ -9,7 +9,7 @@ class MapaEvento {
   String respevent;
   String areacom;
   String dataAgenda;
-  String horaAgenda;
+  String hragenda;
   String ctl;
   String status;
 
@@ -24,7 +24,7 @@ class MapaEvento {
       this.respevent,
       this.areacom,
       this.dataAgenda,
-      this.horaAgenda,
+      this.hragenda,
       this.ctl,
       this.status});
 
@@ -39,7 +39,7 @@ class MapaEvento {
     respevent = json['respevent'];
     areacom = json['areacom'];
     dataAgenda = json['data_agenda'];
-    horaAgenda = json['hora_agenda'];
+    hragenda = json['hora_agenda'];
     ctl = json['ctl'];
     status = json['status'];
   }
@@ -56,7 +56,7 @@ class MapaEvento {
     data['respevent'] = this.respevent;
     data['areacom'] = this.areacom;
     data['data_agenda'] = this.dataAgenda;
-    data['hora_agenda'] = this.horaAgenda;
+    data['hora_agenda'] = this.hragenda;
     data['ctl'] = this.ctl;
     data['status'] = this.status;
     return data;

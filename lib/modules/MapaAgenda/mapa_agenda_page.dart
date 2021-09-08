@@ -29,10 +29,52 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(
           mapaAgendaController.lat.value, mapaAgendaController.lng.value),
-      zoom: 16,
+      zoom: 12,
       tilt: 40,
       bearing: 40,
     )));
+  }
+
+  
+
+Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
+      LatLng centerBounds) async {
+    bool keepZoomingOut = true;
+    while (keepZoomingOut) {
+      final LatLngBounds screenBounds = await controller.getVisibleRegion();
+      if (fits(bounds, screenBounds)) {
+        keepZoomingOut = false;
+        final double zoomLevel = await controller.getZoomLevel() - 0.5;
+        controller.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: centerBounds,
+          zoom: zoomLevel,
+        )));
+        break;
+      } else {
+        final double zoomLevel = await controller.getZoomLevel() - 0.1;
+        controller.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: centerBounds,
+          zoom: zoomLevel,
+        )));
+      }
+    }
+  }
+
+  bool fits(LatLngBounds fitBounds, LatLngBounds screenBounds) {
+    final bool northEastLatitudeCheck =
+        screenBounds.northeast.latitude >= fitBounds.northeast.latitude;
+    final bool northEastLongitudeCheck =
+        screenBounds.northeast.longitude >= fitBounds.northeast.longitude;
+
+    final bool southWestLatitudeCheck =
+        screenBounds.southwest.latitude <= fitBounds.southwest.latitude;
+    final bool southWestLongitudeCheck =
+        screenBounds.southwest.longitude <= fitBounds.southwest.longitude;
+
+    return northEastLatitudeCheck &&
+        northEastLongitudeCheck &&
+        southWestLatitudeCheck &&
+        southWestLongitudeCheck;
   }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
@@ -110,6 +152,7 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
               _controller.complete(controller);
             } else {}
             changeMapMode();
+
             Position position = await Geolocator.getCurrentPosition(
                 desiredAccuracy: LocationAccuracy.high);
 
@@ -127,6 +170,18 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
               );
               controller
                   .animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+                  final LatLng centerBounds = LatLng(
+                  (bounds.northeast.latitude + bounds.southwest.latitude) / 2,
+                  (bounds.northeast.longitude + bounds.southwest.longitude) /
+                      2);
+
+              controller
+                  .moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                target: centerBounds,
+                zoom: 17,
+              )));
+              zoomToFit(controller, bounds, centerBounds);
+             
             } else {
               LatLngBounds bounds = LatLngBounds(
                 southwest: latLatCliente,
@@ -134,7 +189,21 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
               );
               controller
                   .animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+                  final LatLng centerBounds = LatLng(
+                  (bounds.northeast.latitude + bounds.southwest.latitude) / 2,
+                  (bounds.northeast.longitude + bounds.southwest.longitude) /
+                      2);
+
+              controller
+                  .moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                target: centerBounds,
+                zoom: 17,
+              )));
+              zoomToFit(controller, bounds, centerBounds);
+
             }
+
+
             final Uint8List markerIconCliente =
                 await getBytesFromAsset('images/iconUserMap.png', 90);
 
@@ -265,7 +334,9 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
                     fontSize: 14,
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed('/agendarhorario');
+                  },
                 ),
                 SpeedDialChild(
                   child: Icon(Icons.info),

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:apbelem/modules/Visitas/components/DataTable/data_table_visitas_controller.dart';
-import 'package:apbelem/modules/Visitas/components/DataTable/data_table_visitas_model.dart';
 import 'package:apbelem/modules/Visitas/visitas_repository.dart';
 import 'package:get/get.dart';
 

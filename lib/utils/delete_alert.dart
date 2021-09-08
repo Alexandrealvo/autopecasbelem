@@ -6,9 +6,9 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 deleteAlert(context, String text, VoidCallback function) {
   Alert(
     image: Icon(
-      Icons.highlight_off,
-      color: Colors.yellowAccent,
-      size: 60,
+      Icons.warning,
+      color: Colors.amber[400],
+      size: 50,
     ),
     style: AlertStyle(
       backgroundColor: Theme.of(context).textSelectionTheme.selectionColor,

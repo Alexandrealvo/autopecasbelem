@@ -1,5 +1,4 @@
 class MapaEvento {
-  
   String idcliente;
   String fantasia;
   String endereco;
@@ -16,13 +15,13 @@ class MapaEvento {
   String ctlcheckin;
   String ctlcheckout;
   String dtagenda;
+  String hragenda;
   String infocheckin;
   String infocheckout;
   String obs;
 
   MapaEvento(
-      {
-      this.idcliente,
+      {this.idcliente,
       this.fantasia,
       this.endereco,
       this.numero,
@@ -38,12 +37,12 @@ class MapaEvento {
       this.ctlcheckin,
       this.ctlcheckout,
       this.dtagenda,
+      this.hragenda,
       this.infocheckin,
       this.infocheckout,
       this.obs});
 
   MapaEvento.fromJson(Map<String, dynamic> json) {
-    
     idcliente = json['idcliente'];
     fantasia = json['fantasia'];
     endereco = json['endereco'];
@@ -60,6 +59,7 @@ class MapaEvento {
     ctlcheckin = json['ctlcheckin'];
     ctlcheckout = json['ctlcheckout'];
     dtagenda = json['dtagenda'];
+    hragenda = json['hragenda'];
     infocheckin = json['infocheckin'];
     infocheckout = json['infocheckout'];
     obs = json['obs'];
@@ -68,7 +68,6 @@ class MapaEvento {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
-  
     data['idcliente'] = this.idcliente;
     data['fantasia'] = this.fantasia;
     data['endereco'] = this.endereco;
@@ -83,8 +82,9 @@ class MapaEvento {
     data['checkin'] = this.checkin;
     data['checkout'] = this.checkout;
     data['ctlcheckin'] = this.ctlcheckin;
-     data['ctlcheckout'] = this.ctlcheckout;
+    data['ctlcheckout'] = this.ctlcheckout;
     data['dtagenda'] = this.dtagenda;
+    data['hragenda'] = this.dtagenda;
     data['infocheckin'] = this.infocheckin;
     data['infocheckout'] = this.infocheckout;
     obs = data['obs'] = this.obs;
