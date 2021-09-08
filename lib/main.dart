@@ -10,11 +10,9 @@ import 'package:apbelem/modules/Comunicados/comunicados.dart';
 import 'package:apbelem/modules/Esqueci/esqueci_senha.dart';
 import 'package:apbelem/modules/Home/home_page.dart';
 import 'package:apbelem/modules/Mapa/mapa_cliente.dart';
-import 'package:apbelem/modules/MapaAgenda/components/info_check_page.dart';
 import 'package:apbelem/modules/MapaAgenda/mapa_agenda_page.dart';
 import 'package:apbelem/modules/Perfil/perfil.dart';
 import 'package:apbelem/modules/Senha/senha.dart';
-import 'package:apbelem/modules/Visitas/data_table_visitas_page.dart';
 import 'package:apbelem/modules/Visitas/visitas_page.dart';
 import 'package:apbelem/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +20,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'modules/Login/login_page.dart';
+import 'modules/MapaAgenda/components/InfoCheck/info_check_page.dart';
+import 'modules/Visitas/components/DataTable/data_table_visitas_page.dart';
 
 void main() {
   runApp(GetMaterialApp(

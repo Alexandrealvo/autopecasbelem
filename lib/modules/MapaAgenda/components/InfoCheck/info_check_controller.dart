@@ -1,13 +1,12 @@
 import 'dart:convert';
-
-import 'package:apbelem/modules/MapaAgenda/components/info_check_repository.dart';
 import 'package:apbelem/utils/alert_button_pressed.dart';
 import 'package:apbelem/utils/confirmed_button_pressed.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../mapa_agenda_controller.dart';
+import '../../mapa_agenda_controller.dart';
+import 'info_check_repository.dart';
 
 class InfoCheckController extends GetxController {
   MapaAgendaController mapaAgendaController = Get.put(MapaAgendaController());

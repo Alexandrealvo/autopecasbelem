@@ -281,20 +281,6 @@ class VisualizarAgenda extends StatelessWidget {
                               } else {
                                 print('abre page info visita');
                               }
-
-                              //detalhesReservasController.idEve.value = e.idevento;
-                              //detalhesReservasController.validaUsu.value = e.validausu;
-
-                              /* mapacalendarioController.goToDetails(
-                                          e.nome,
-                                          e.unidade,
-                                          e.titulo,
-                                          e.dataAgenda,
-                                          e.areacom,
-                                          e.status,
-                                          e.horaAgenda,
-                                          e.respevent,
-                                        );*/
                             },
                           ),
                         );

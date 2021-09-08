@@ -1,7 +1,8 @@
-import 'package:apbelem/modules/MapaAgenda/components/info_check_controller.dart';
 import 'package:apbelem/modules/MapaAgenda/mapa_agenda_controller.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import 'info_check_controller.dart';
 
 class InfoCheckRepository {
   static Future changeHours() async {

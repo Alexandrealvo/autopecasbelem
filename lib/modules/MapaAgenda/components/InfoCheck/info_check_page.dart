@@ -1,10 +1,10 @@
-import 'package:apbelem/modules/MapaAgenda/components/info_check_controller.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../mapa_agenda_controller.dart';
+import '../../mapa_agenda_controller.dart';
+import 'info_check_controller.dart';
 
 class InfoCheckPage extends StatelessWidget {
   final InfoCheckController infoCheckController =
