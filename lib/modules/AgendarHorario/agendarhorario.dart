@@ -1,13 +1,55 @@
 import 'package:apbelem/modules/AgendarHorario/agendarhorario.controller.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
+import 'package:apbelem/utils/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
-class AgendarHorario extends StatelessWidget {
+
+class AgendarHorario extends StatefulWidget {
+  @override
+  _AgendarHorarioState createState() => _AgendarHorarioState();
+}
+
+class _AgendarHorarioState extends State<AgendarHorario> {
   //const AgendarHorario({ Key? key }) : super(key: key);
   final AgendaHorarioController agendahorarioController =
       Get.put(AgendaHorarioController());
+
+  var startSelectedDate = DateTime.now();
+  var startSelectedTime = TimeOfDay.now();
+  var endSelectedDate = DateTime.now();
+  var endSelectedTime = TimeOfDay.now();
+  var startTime = TextEditingController();
+  var endTime = TextEditingController();
+
+  Future<TimeOfDay> selectTime(BuildContext context) {
+    final now = DateTime.now();
+    return showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+            child: child);
+      },
+    );
+  }
+
+  Future<TimeOfDay> selectEndTime(BuildContext context) {
+    return showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: 23, minute: 59),
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+            child: child);
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,107 +76,52 @@ class AgendarHorario extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              agendahorarioController.horaMaskFormatter
-                            ],
-                            controller: agendahorarioController.horaent.value,
-                            style: GoogleFonts.montserrat(
-                              fontSize: 14,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor,
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 8,
                             ),
-                            decoration: InputDecoration(
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 1,
-                                ),
-                              ),
-                              labelText: 'Hora Entrada',
-                              labelStyle: GoogleFonts.montserrat(
+                                  child: Text(
+                              'Hora da Visita:',
+                              style: GoogleFonts.montserrat(
                                 fontSize: 14,
                                 color: Theme.of(context)
                                     .textSelectionTheme
                                     .selectionColor,
                               ),
-                              isDense: true,
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 2,
+                                  ),
+                          ),
+                          Container(
+                            child: GestureDetector(
+                              onTap: () async {
+                                startSelectedTime = await selectTime(context);
+                                if (startSelectedTime == null) return;
+
+                                setState(() {
+                                  startSelectedDate = DateTime(
+                                    startSelectedDate.year,
+                                    startSelectedDate.month,
+                                    startSelectedDate.day,
+                                    startSelectedTime.hour,
+                                    startSelectedTime.minute,
+                                  );
+                                });
+                              },
+                              child: customTextField(
+                                context,
+                                null,
+                                DateFormat("HH:mm").format(
+                                  startSelectedDate,
                                 ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 1,
-                                ),
+                                false,
+                                1,
+                                false,
+                                startTime,
+                                false,
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              agendahorarioController.horaMaskFormatter
-                            ],
-                            controller: agendahorarioController.horaent.value,
-                            style: GoogleFonts.montserrat(
-                              fontSize: 14,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor,
-                            ),
-                            decoration: InputDecoration(
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 1,
-                                ),
-                              ),
-                              labelText: 'Hora Entrada',
-                              labelStyle: GoogleFonts.montserrat(
-                                fontSize: 14,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
-                              ),
-                              isDense: true,
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 2,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          ),
+                         
                           SizedBox(
                             height: 30,
                           ),
@@ -185,7 +172,7 @@ class AgendarHorario extends StatelessWidget {
                                 });*/
                               },
                               child: Text(
-                                "Incluir Horário",
+                                "Incluir",
                                 style: GoogleFonts.montserrat(
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context)

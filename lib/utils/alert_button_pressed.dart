@@ -6,7 +6,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 onAlertButtonPressed(context, String text, String page) {
   Alert(
     image: Icon(
-      Icons.close,
+      Icons.highlight_off,
       color: Theme.of(context).errorColor,
       size: 50,
     ),

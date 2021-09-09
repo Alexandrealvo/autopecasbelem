@@ -197,8 +197,11 @@ class VisualizarAgenda extends StatelessWidget {
                                         ? Colors.green[400]
                                         : (e.ctlcheckin == "1" &&
                                                     e.ctlcheckout == "1") &&
-                                                (e.infocheckin == "1" &&
-                                                    e.infocheckout == "0")
+                                                ((e.infocheckin == "0" &&
+                                                        e.infocheckout ==
+                                                            "1") ||
+                                                    (e.infocheckin == "1" &&
+                                                        e.infocheckout == "0"))
                                             ? Colors.blue[400]
                                             : (e.ctlcheckin == "1" &&
                                                         e.ctlcheckout == "1") &&
@@ -210,10 +213,22 @@ class VisualizarAgenda extends StatelessWidget {
                           margin: const EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 4.0),
                           child: ListTile(
-                            trailing: Icon(
+                            trailing: e.hragenda == "00:00"
+                                ? Icon(
+                                    Icons.hourglass_empty,
+                                    color: Colors.black,
+                                    size: 20,
+                                  )
+                                : Text("${e.hragenda}h",
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black87)),
+
+                            /*Icon(
                               Icons.arrow_right_outlined,
                               color: Colors.black,
-                            ),
+                            ),*/
                             title: Text(
                               e.fantasia,
                               style: GoogleFonts.montserrat(
@@ -284,65 +299,6 @@ class VisualizarAgenda extends StatelessWidget {
                             },
                           ),
                         );
-
-                        /*Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: e.status == 'Aprovado'
-                                ? Colors.green[400]
-                                : e.status == 'Recusado'
-                                    ? Colors.red[300]
-                                    : Colors.amber,
-                          ),
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 4.0),
-                          child: ListTile(
-                            trailing: Icon(
-                              Icons.arrow_right_outlined,
-                              color: Colors.black,
-                            ),
-                            title: Text(
-                              e.nome,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 12,
-                                color: Colors.black,
-                              ),
-                            ),
-                            subtitle: RichText(
-                              text: TextSpan(
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: '${e.unidade} - ${e.horaAgenda}h',
-                                      style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                            onTap: () {
-                              detalhesReservasController.idEve.value =
-                                  e.idevento;
-                              detalhesReservasController.validaUsu.value =
-                                  e.validausu;
-
-                              print(e.areacom);
-
-                              detalhesReservasController.goToDetails(
-                                e.nome,
-                                e.unidade,
-                                e.titulo,
-                                e.dataAgenda,
-                                e.areacom,
-                                e.status,
-                                e.horaAgenda,
-                                e.respevent,
-                              );
-                            },
-                          ),
-                        );*/
                       }),
                     ],
                   ),
