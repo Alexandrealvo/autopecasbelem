@@ -1,4 +1,5 @@
 import 'package:apbelem/modules/Visitas/visitas_controller.dart';
+import 'package:apbelem/utils/alert_button_pressed.dart';
 import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:apbelem/utils/custom_text_field.dart';
 import 'package:apbelem/utils/delete_alert.dart';
@@ -26,30 +27,19 @@ class _VisitasPageState extends State<VisitasPage> {
   var startTime = TextEditingController();
   var endTime = TextEditingController();
 
-  Future<TimeOfDay> selectTime(BuildContext context) {
-    final now = DateTime.now();
-    return showTimePicker(
-      context: context,
-      initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
-      builder: (BuildContext context, Widget child) {
-        return MediaQuery(
-            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-            child: child);
-      },
-    );
-  }
+  Future<DateTime> selectDateTime(BuildContext context) => showDatePicker(
+        context: context,
+        initialDate: DateTime.now().add(Duration(seconds: 1)),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100),
+      );
 
-  Future<TimeOfDay> selectEndTime(BuildContext context) {
-    return showTimePicker(
-      context: context,
-      initialTime: TimeOfDay(hour: 23, minute: 59),
-      builder: (BuildContext context, Widget child) {
-        return MediaQuery(
-            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-            child: child);
-      },
-    );
-  }
+  Future<DateTime> selectDateOnEndTime(BuildContext context) => showDatePicker(
+        context: context,
+        initialDate: startSelectedDate,
+        firstDate: startSelectedDate,
+        lastDate: DateTime(2100),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -158,8 +148,8 @@ class _VisitasPageState extends State<VisitasPage> {
                         Container(
                           child: GestureDetector(
                             onTap: () async {
-                              startSelectedTime = await selectTime(context);
-                              if (startSelectedTime == null) return;
+                              startSelectedDate = await selectDateTime(context);
+                              if (startSelectedDate == null) return;
 
                               setState(() {
                                 startSelectedDate = DateTime(
@@ -174,7 +164,7 @@ class _VisitasPageState extends State<VisitasPage> {
                             child: customTextField(
                               context,
                               null,
-                              DateFormat("HH:mm").format(
+                              DateFormat("dd/MM/yyyy").format(
                                 startSelectedDate,
                               ),
                               false,
@@ -203,9 +193,9 @@ class _VisitasPageState extends State<VisitasPage> {
                         Container(
                           child: GestureDetector(
                             onTap: () async {
-                              endSelectedTime = await selectEndTime(context);
-                              if (endSelectedTime == null) return;
-
+                              endSelectedDate =
+                                  await selectDateOnEndTime(context);
+                              if (endSelectedDate == null) return;
                               setState(() {
                                 endSelectedDate = DateTime(
                                   endSelectedDate.year,
@@ -219,7 +209,7 @@ class _VisitasPageState extends State<VisitasPage> {
                             child: customTextField(
                               context,
                               null,
-                              DateFormat("HH:mm").format(
+                              DateFormat("dd/MM/yyyy").format(
                                 endSelectedDate,
                               ),
                               false,
@@ -254,15 +244,22 @@ class _VisitasPageState extends State<VisitasPage> {
                             ),
                             onPressed: () async {
                               visitasController.initialDate.value =
-                                  DateFormat("HH:mm").format(
+                                  DateFormat("yyyy-MM-dd").format(
                                 startSelectedDate,
                               );
                               visitasController.finalDate.value =
-                                  DateFormat("HH:mm").format(
+                                  DateFormat('yyyy-MM-dd').format(
                                 endSelectedDate,
                               );
 
-                              await visitasController.doRelatorios();
+                              if (visitasController.firstId.value == '0' ||
+                                  startSelectedDate == DateTime.now() ||
+                                  endSelectedDate == DateTime.now()) {
+                                onAlertButtonPressed(
+                                    context, 'Campo obrigátorio vazio', null);
+                              } else {
+                                await visitasController.doRelatorios();
+                              }
                             },
                             child: Text(
                               "Incluir Horário",

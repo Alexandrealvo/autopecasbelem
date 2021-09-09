@@ -11,45 +11,70 @@ class DataTableVisitas extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        child: DataTable(
-          sortColumnIndex: 0,
-          sortAscending: true,
-          columns: [
-            DataColumn(
-              label: Text(
-                'Cliente',
-                style: GoogleFonts.montserrat(fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Checkin',
-                style: GoogleFonts.montserrat(fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Checkout',
-                style: GoogleFonts.montserrat(fontSize: 14),
-              ),
-            ),
-          ],
-          rows: [
-            for (var i = 0; i < dataTableController.data.length; i++)
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(
-                    Text(dataTableController.data[i]['cliente'],
-                        style: GoogleFonts.montserrat(fontSize: 14)),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          child: DataTable(
+              sortColumnIndex: 0,
+              sortAscending: true,
+              columns: [
+                DataColumn(
+                  label: Text(
+                    'Cliente',
+                    style: GoogleFonts.montserrat(fontSize: 14),
                   ),
-                  DataCell(Text('data.checking',
-                      style: GoogleFonts.montserrat(fontSize: 14))),
-                  DataCell(Text('data.checkout',
-                      style: GoogleFonts.montserrat(fontSize: 14))),
-                ],
-              ),
-          ],
+                ),
+                DataColumn(
+                  label: Text(
+                    'Checkin',
+                    style: GoogleFonts.montserrat(fontSize: 14),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Checkout',
+                    style: GoogleFonts.montserrat(fontSize: 14),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Tempo total',
+                    style: GoogleFonts.montserrat(fontSize: 14),
+                  ),
+                ),
+              ],
+              rows: dataTableController.data
+                  .map(
+                    (item) => DataRow(
+                      cells: <DataCell>[
+                        DataCell(
+                          Text(
+                            item['cliente'],
+                            style: GoogleFonts.montserrat(fontSize: 14),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            item['checking'],
+                            style: GoogleFonts.montserrat(fontSize: 14),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            item['checkout'],
+                            style: GoogleFonts.montserrat(fontSize: 14),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            item['tempototal'],
+                            style: GoogleFonts.montserrat(fontSize: 14),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList()),
         ),
       ),
     );
