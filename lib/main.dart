@@ -1,4 +1,5 @@
 import 'package:apbelem/modules/Agenda/agendar_visitas.dart';
+import 'package:apbelem/modules/Agenda/detalhes_visita.dart';
 import 'package:apbelem/modules/Agenda/visualizar_agenda.dart';
 import 'package:apbelem/modules/AgendarHorario/agendarhorario.dart';
 import 'package:apbelem/modules/Chamadas/chamadas.dart';
@@ -110,6 +111,10 @@ void main() {
       GetPage(
         name: '/dataTableVisitas',
         page: () => DataTableVisitas(),
+      ),
+      GetPage(
+        name: '/detalhesvisitas',
+        page: () => DetalhesVisita(),
       ),
     ],
   ));

@@ -29,7 +29,7 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(
           mapaAgendaController.lat.value, mapaAgendaController.lng.value),
-      zoom: 16,
+      zoom: 18,
       tilt: 20,
       bearing: 45,
     )));
@@ -115,8 +115,8 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
 
   @override
   Widget build(BuildContext context) {
-    Color cor = Colors.yellow.withOpacity(0.3);
-
+ 
+         
     Future<String> getJsonFile(String path) async {
       return await rootBundle.loadString(path);
     }
@@ -232,8 +232,12 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
               center: LatLng(mapaAgendaController.lat.value,
                   mapaAgendaController.lng.value),
               radius: 80,
-              strokeColor: cor,
-              fillColor: cor,
+              strokeColor: mapaAgendaController.ctlcheckin.value == '0'
+                  ? Colors.yellow.withOpacity(0.2)
+                  : Colors.red.withOpacity(0.2),
+              fillColor: mapaAgendaController.ctlcheckin.value == '0'
+                  ? Colors.yellow.withOpacity(0.3)
+                  : Colors.red.withOpacity(0.3),
             )
           ]),
           markers: mapaAgendaController.markers,

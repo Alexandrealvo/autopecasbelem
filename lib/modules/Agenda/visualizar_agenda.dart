@@ -51,6 +51,7 @@ class VisualizarAgenda extends StatelessWidget {
         ),
         centerTitle: true,
       ),
+
       /* floatingActionButton: Obx(() {
         return calendarioController.onSelected.value == true &&
                 reservasController.multi.value == 'S' &&
@@ -267,6 +268,10 @@ class VisualizarAgenda extends StatelessWidget {
                               mapaAgendaController.idVisita.value = e.idvisita;
                               mapaAgendaController.idCliente.value =
                                   e.idcliente;
+                              mapaAgendaController.dtagenda.value = e.dtagenda;
+                              mapaAgendaController.checkin.value = e.checkout;
+                              mapaAgendaController.checkout.value = e.checkout;
+                              mapaAgendaController.obs.value = e.obs;
 
                               var temp = DateTime.now().toUtc();
                               var d1 =
@@ -288,13 +293,13 @@ class VisualizarAgenda extends StatelessWidget {
                               } else if ((d2.compareTo(d1) < 0) &&
                                   (e.ctlcheckin == '0' ||
                                       e.ctlcheckout == '0')) {
-                               Get.toNamed('/infoCheck');
+                                Get.toNamed('/infoCheck');
                               } else if (d2.compareTo(d1) < 0 &&
                                   (e.ctlcheckin == '1' &&
                                       e.ctlcheckout == '1')) {
-                                print('abre page info visita');
+                                Get.toNamed('/detalhesvisitas');
                               } else {
-                                print('abre page info visita');
+                                Get.toNamed('/detalhesvisitas');
                               }
                             },
                           ),

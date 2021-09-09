@@ -235,9 +235,8 @@ class LoginPage extends StatelessWidget {
                                             loginController.phone.value =
                                                 value['phone'];
 
-                                                 loginController.storageId();
-
                                             Get.toNamed('/home');
+                                             loginController.storageId();
                                           }
                                         },
                                       );

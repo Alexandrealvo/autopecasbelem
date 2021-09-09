@@ -43,7 +43,7 @@ class CalendarioController extends GetxController {
                 numero: eventos['numero'],
                 complemento: eventos['complemento'],
                 bairro: eventos['bairro'],
-                cidade: eventos[' cidade'],
+                cidade: eventos['cidade'],
                 uf: eventos['uf'],
                 ctlgps: eventos['ctlgps'],
                 latlng: eventos['latlng'],

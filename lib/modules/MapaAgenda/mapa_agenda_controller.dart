@@ -21,8 +21,13 @@ class MapaAgendaController extends GetxController {
   var uf = ''.obs;
   var number = ''.obs;
   var ctlcheckin = ''.obs;
+  var dtagenda = ''.obs;
   var idVisita = ''.obs;
   var idCliente = ''.obs;
+  var checkin = ''.obs;
+  var checkout = ''.obs;
+  var obs = ''.obs;
+  var observacao = TextEditingController().obs;
 
   var markers = <Marker>{}.obs;
 
@@ -49,7 +54,7 @@ class MapaAgendaController extends GetxController {
 
     if (dados['valida'] == 0) {
       onAlertButtonPressed(
-        context, 'Cliente Fora do Raio de Check-in!', '/home');
+          context, 'Cliente Fora do Raio de Check-in!', '/home');
     } else if (dados['valida'] == 1) {
       confirmedButtonPressed(
           context, 'Check-in realizado com sucesso!', '/home');
@@ -57,7 +62,6 @@ class MapaAgendaController extends GetxController {
       onAlertButtonPressed(
           context, 'Houve Algum Problema! Tente Novamente', '/home');
     }
-
   }
 
   doCheckout(context) async {

@@ -27,11 +27,10 @@ class LoginController extends GetxController {
   Future<void> launched;
 
   storageId() async {
-    print(email.value.text);
     await GetStorage.init();
     final box = GetStorage();
-   
-    box.write('email', email.value.text);
+    box.write('password', password.value.text);
+    box.write('emailController', email.value.text);
   }
 
   login() async {
@@ -43,6 +42,26 @@ class LoginController extends GetxController {
           "email": email.value.text,
           "senha": password.value.text,
         });
+    isLoading(false);
+
+    var dadosUsuario = json.decode(response.body);
+
+    if (dadosUsuario['valida'] == 1) {
+      return dadosUsuario;
+    } else {
+      return null;
+    }
+  }
+
+  loginAuth(String senha, String email) async {
+    isLoading(true);
+    final response = await http.post(
+        Uri.https("admautopecasbelem.com.br", '/login/flutter/login.php'),
+        body: {
+          "email": email,
+          "senha": senha,
+        });
+
     isLoading(false);
 
     var dadosUsuario = json.decode(response.body);

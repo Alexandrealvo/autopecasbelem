@@ -76,6 +76,7 @@ class _InfoCheckPageState extends State<InfoCheckPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          
                           mapaAgendaController.ctlcheckin.value == '0'
                               ? Container(
                                   padding: EdgeInsets.symmetric(
@@ -161,7 +162,8 @@ class _InfoCheckPageState extends State<InfoCheckPage> {
                                 ),
                               ),
                               onPressed: () async {
-                               
+                                infoCheckController.hour.value.text =
+                                    "${startSelectedTime.hour.toString()}:${startSelectedTime.minute.toString()}";
                                 await infoCheckController.changeHours(context);
                               },
                               child: Text(
