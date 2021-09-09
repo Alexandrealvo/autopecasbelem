@@ -29,8 +29,8 @@ class _VisitasPageState extends State<VisitasPage> {
   Future<DateTime> selectDateTime(BuildContext context) => showDatePicker(
         context: context,
         initialDate: DateTime.now().add(Duration(seconds: 1)),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2100),
+        firstDate: DateTime(2021),
+        lastDate: DateTime(2030),
       );
 
   Future<DateTime> selectDateOnEndTime(BuildContext context) => showDatePicker(
@@ -254,13 +254,12 @@ class _VisitasPageState extends State<VisitasPage> {
                                 endSelectedDate,
                               );
 
-                              if (visitasController.firstId.value == '0' ||
-                                  startSelectedDate == DateTime.now() ||
+                              if (startSelectedDate == DateTime.now() ||
                                   endSelectedDate == DateTime.now()) {
                                 onAlertButtonPressed(
-                                    context, 'Campo obrigátorio vazio', null);
+                                    context, 'Campo Obrigátorio Vazio', null);
                               } else {
-                                await visitasController.doRelatorios();
+                                await visitasController.doRelatorios(context);
                               }
                             },
                             child: Text(

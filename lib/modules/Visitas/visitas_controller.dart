@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:apbelem/modules/Visitas/components/DataTable/data_table_visitas_controller.dart';
 import 'package:apbelem/modules/Visitas/visitas_repository.dart';
+import 'package:apbelem/utils/alert_button_pressed.dart';
 import 'package:get/get.dart';
 
 class VisitasController extends GetxController {
@@ -24,14 +25,16 @@ class VisitasController extends GetxController {
     isLoading(false);
   }
 
-  doRelatorios() async {
+  doRelatorios(context) async {
     isLoading(true);
 
     final response = await VisitasRepository.doRelatorios();
 
-    print(json.decode(response.body));
-
     var dados = json.decode(response.body);
+
+    if (dados == null) {
+      onAlertButtonPressed(context, 'Sem Registros de Visitas!', '/home');
+    }
 
     dataTableController.data.assignAll(dados);
 

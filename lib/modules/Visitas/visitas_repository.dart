@@ -19,6 +19,8 @@ class VisitasRepository {
   static Future doRelatorios() async {
     LoginController loginController = Get.put(LoginController());
     VisitasController visitasController = Get.put(VisitasController());
+
+
     print({
       loginController.idusu.value,
       visitasController.firstId.value,

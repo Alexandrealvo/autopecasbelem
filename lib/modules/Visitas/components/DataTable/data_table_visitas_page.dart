@@ -10,43 +10,90 @@ class DataTableVisitas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+     appBar: AppBar(
+        title: Text(
+          'Visitas',
+          style: GoogleFonts.montserrat(
+            fontSize: 16,
+            color: Theme.of(context).textSelectionTheme.selectionColor,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Container(
           child: DataTable(
               sortColumnIndex: 0,
               sortAscending: true,
+              
               columns: [
                 DataColumn(
                   label: Text(
-                    'Cliente',
-                    style: GoogleFonts.montserrat(fontSize: 14),
+                    'DATA',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
-                    'Checkin',
-                    style: GoogleFonts.montserrat(fontSize: 14),
+                    'CLIENTE',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
-                    'Checkout',
-                    style: GoogleFonts.montserrat(fontSize: 14),
+                    'CHECK-IN',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
-                    'Tempo total',
-                    style: GoogleFonts.montserrat(fontSize: 14),
+                    'CHECK-OUT',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'TEMPO',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
               rows: dataTableController.data
                   .map(
                     (item) => DataRow(
+                      color: MaterialStateColor.resolveWith((states) {
+                        return item['info_checkin'] == '0' &&
+                                item['info_checkout'] == '0'
+                            ? Colors.green
+                            : (item['info_checkin'] == '1' &&
+                                        item['info_checkout'] == '0') ||
+                                    (item['info_checkin'] == '0' &&
+                                        item['info_checkout'] == '1')
+                                ? Colors.blue
+                                : Colors.grey[700];
+                      }),
                       cells: <DataCell>[
+                        DataCell(
+                          Text(
+                            item['dt_agenda'],
+                            style: GoogleFonts.montserrat(fontSize: 14),
+                          ),
+                        ),
                         DataCell(
                           Text(
                             item['cliente'],
@@ -67,7 +114,7 @@ class DataTableVisitas extends StatelessWidget {
                         ),
                         DataCell(
                           Text(
-                            item['tempototal'],
+                            item['tempo'],
                             style: GoogleFonts.montserrat(fontSize: 14),
                           ),
                         ),

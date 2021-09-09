@@ -183,7 +183,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                               ],
                             )),
                       ),
-                      GestureDetector(
+                      /*GestureDetector(
                         onTap: () {
                           //Get.toNamed('/reserva');
                         },
@@ -260,7 +260,7 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                                 ),
                               ],
                             )),
-                      ),
+                      ),*/
                     ],
                   ),
                 ),
