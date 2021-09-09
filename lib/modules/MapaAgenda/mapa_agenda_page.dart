@@ -29,9 +29,9 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(
           mapaAgendaController.lat.value, mapaAgendaController.lng.value),
-      zoom: 12,
-      tilt: 40,
-      bearing: 40,
+      zoom: 16,
+      tilt: 20,
+      bearing: 45,
     )));
   }
 
