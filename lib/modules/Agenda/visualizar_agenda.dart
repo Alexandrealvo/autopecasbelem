@@ -288,7 +288,7 @@ class VisualizarAgenda extends StatelessWidget {
                               } else if ((d2.compareTo(d1) < 0) &&
                                   (e.ctlcheckin == '0' ||
                                       e.ctlcheckout == '0')) {
-                                print('abre page infocheck');
+                               Get.toNamed('/infoCheck');
                               } else if (d2.compareTo(d1) < 0 &&
                                   (e.ctlcheckin == '1' &&
                                       e.ctlcheckout == '1')) {
