@@ -1,5 +1,6 @@
 import 'package:apbelem/modules/Home/home_controller.dart';
 import 'package:apbelem/modules/Login/login_controller.dart';
+import 'package:apbelem/utils/auth_controller.dart';
 import 'package:apbelem/utils/edge_alert_danger.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,11 @@ import 'dart:core';
 class LoginPage extends StatelessWidget {
   final LoginController loginController =
       Get.put(LoginController(), permanent: true);
+
   final HomePageController homePageController = Get.put(HomePageController());
+
+  final AuthController authController = Get.put(AuthController());
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -204,6 +209,7 @@ class LoginPage extends StatelessWidget {
                                       );
                                     }
                                     if (_formKey.currentState.validate()) {
+                                     
                                       loginController.login().then(
                                         (value) {
                                           if (value == null) {
@@ -228,6 +234,9 @@ class LoginPage extends StatelessWidget {
                                                 value['genero'];
                                             loginController.phone.value =
                                                 value['phone'];
+
+                                                 loginController.storageId();
+
                                             Get.toNamed('/home');
                                           }
                                         },
@@ -259,7 +268,6 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-
                             Container(
                               width: MediaQuery.of(context).size.width,
                               child: Center(
@@ -287,12 +295,12 @@ class LoginPage extends StatelessWidget {
                                     padding: const EdgeInsets.all(10.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                    Get.toNamed('/esqueci');
-                                  },
+                                        Get.toNamed('/esqueci');
+                                      },
                                       child: Text(
                                         "Esqueceu a Senha?",
                                         style: GoogleFonts.montserrat(
-                                          color:
+                                            color:
                                                 Theme.of(context).primaryColor,
                                             fontSize: 12),
                                         textDirection: TextDirection.ltr,
@@ -362,8 +370,7 @@ class LoginPage extends StatelessWidget {
                                             ],
                                           ),
                                         ]),
-                                      ),*/ 
-                            
+                                      ),*/
                           ],
                         ),
                       ),
