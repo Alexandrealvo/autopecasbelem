@@ -254,7 +254,6 @@ class _AgendarVisitasState extends State<AgendarVisitas> {
                                     .getAgendarVisitas()
                                     .then((value) {
                                   if (value == 1) {
-                                    print('teste');
                                     edgeAlertWidgetTop(
                                       context,
                                       'Agendamento Realizado com Sucesso!',

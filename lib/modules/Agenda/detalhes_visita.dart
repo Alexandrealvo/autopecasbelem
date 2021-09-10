@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class DetalhesVisita extends StatelessWidget {
-  //const DetalhesVisita({ Key? key }) : super(key: key);
   final MapaAgendaController mapaAgendaController =
       Get.put(MapaAgendaController());
 

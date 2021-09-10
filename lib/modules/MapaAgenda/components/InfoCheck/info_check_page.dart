@@ -51,6 +51,14 @@ class _InfoCheckPageState extends State<InfoCheckPage> {
   }
 
   @override
+  void initState() {
+    infoCheckController.hour.value.text =
+        "${startSelectedTime.hour.toString()}:${startSelectedTime.minute.toString()}";
+    print(infoCheckController.hour.value.text);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -76,7 +84,6 @@ class _InfoCheckPageState extends State<InfoCheckPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          
                           mapaAgendaController.ctlcheckin.value == '0'
                               ? Container(
                                   padding: EdgeInsets.symmetric(
