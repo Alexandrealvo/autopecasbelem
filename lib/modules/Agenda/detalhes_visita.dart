@@ -179,7 +179,7 @@ class DetalhesVisita extends StatelessWidget {
                     child: customTextField(
                       context,
                       "Faça uma Observação...",
-                      mapaAgendaController.district.value,
+                      mapaAgendaController.obs.value,
                       true,
                       3,
                       true,
@@ -207,7 +207,7 @@ class DetalhesVisita extends StatelessWidget {
                         ),
                       ),
                       onPressed: () async {
-                        //await infoCheckController.changeHours(context);
+                        await mapaAgendaController.doObs(context);
                       },
                       child: Text(
                         "Enviar Observação",

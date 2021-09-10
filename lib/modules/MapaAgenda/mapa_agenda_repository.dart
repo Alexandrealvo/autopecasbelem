@@ -18,6 +18,18 @@ class MapaAgendaRepository {
       },
     );
   }
+   static Future doObs() async {
+    MapaAgendaController mapaAgendaController = Get.put(MapaAgendaController());
+
+    return await http.post(
+      Uri.https("www.admautopecasbelem.com.br",
+          "/login/flutter/visitas_obs_incluir.php"),
+      body: {
+        'idvisita': mapaAgendaController.idVisita.value,
+        'obs': mapaAgendaController.observacao.value.text,
+      },
+    );
+  }
 
   static Future doChangeGps() async {
     MapaAgendaController mapaAgendaController = Get.put(MapaAgendaController());
