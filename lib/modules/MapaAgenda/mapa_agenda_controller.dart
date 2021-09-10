@@ -47,6 +47,19 @@ class MapaAgendaController extends GetxController {
     isLoading(false);
   }
 
+doObs(context) async {
+    final response = await MapaAgendaRepository.doObs();
+
+    var dados = json.decode(response.body);
+
+    if (dados['valida'] == 1) {
+      confirmedButtonPressed(context, 'Observação salva com sucesso!', '/home');
+    } else {
+      onAlertButtonPressed(
+          context, 'Houve Algum Problema! Tente Novamente', '/home');
+    }
+  }
+  
   doCheckIn(context) async {
     final response = await MapaAgendaRepository.doCheckin();
 
