@@ -10,7 +10,7 @@ class DataTableVisitas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         title: Text(
           'Visitas',
           style: GoogleFonts.montserrat(
@@ -20,108 +20,112 @@ class DataTableVisitas extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          child: DataTable(
-              sortColumnIndex: 0,
-              sortAscending: true,
-              
-              columns: [
-                DataColumn(
-                  label: Text(
-                    'DATA',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+           
+          child: Container(
+            child: DataTable(
+                sortColumnIndex: 0,
+                sortAscending: true,
+                columns: [
+                  DataColumn(
+                    label: Text(
+                      'DATA',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                DataColumn(
-                  label: Text(
-                    'CLIENTE',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                  DataColumn(
+                    label: Text(
+                      'CLIENTE',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                DataColumn(
-                  label: Text(
-                    'CHECK-IN',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                  DataColumn(
+                    label: Text(
+                      'CHECK-IN',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                DataColumn(
-                  label: Text(
-                    'CHECK-OUT',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                  DataColumn(
+                    label: Text(
+                      'CHECK-OUT',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                DataColumn(
-                  label: Text(
-                    'TEMPO',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                  DataColumn(
+                    label: Text(
+                      'TEMPO',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-              ],
-              rows: dataTableController.data
-                  .map(
-                    (item) => DataRow(
-                      color: MaterialStateColor.resolveWith((states) {
-                        return item['info_checkin'] == '0' &&
-                                item['info_checkout'] == '0'
-                            ? Colors.green
-                            : (item['info_checkin'] == '1' &&
-                                        item['info_checkout'] == '0') ||
-                                    (item['info_checkin'] == '0' &&
-                                        item['info_checkout'] == '1')
-                                ? Colors.blue
-                                : Colors.grey[700];
-                      }),
-                      cells: <DataCell>[
-                        DataCell(
-                          Text(
-                            item['dt_agenda'],
-                            style: GoogleFonts.montserrat(fontSize: 14),
+                ],
+                rows: dataTableController.data
+                    .map(
+                      (item) => DataRow(
+                       
+                        color: MaterialStateColor.resolveWith((states) {
+                          return item['info_checkin'] == '0' &&
+                                  item['info_checkout'] == '0'
+                              ? Colors.green
+                              : (item['info_checkin'] == '1' &&
+                                          item['info_checkout'] == '0') ||
+                                      (item['info_checkin'] == '0' &&
+                                          item['info_checkout'] == '1')
+                                  ? Colors.blue
+                                  : Colors.grey[700];
+                        }),
+                        cells: <DataCell>[
+                          DataCell(
+                            Text(
+                              item['dt_agenda'],
+                              style: GoogleFonts.montserrat(fontSize: 14),
+                            ),
                           ),
-                        ),
-                        DataCell(
-                          Text(
-                            item['cliente'],
-                            style: GoogleFonts.montserrat(fontSize: 14),
+                          DataCell(
+                            Text(
+                              item['cliente'],
+                              style: GoogleFonts.montserrat(fontSize: 14),
+                            ),
                           ),
-                        ),
-                        DataCell(
-                          Text(
-                            item['checking'],
-                            style: GoogleFonts.montserrat(fontSize: 14),
+                          DataCell(
+                            Text(
+                              item['checking'],
+                              style: GoogleFonts.montserrat(fontSize: 14),
+                            ),
                           ),
-                        ),
-                        DataCell(
-                          Text(
-                            item['checkout'],
-                            style: GoogleFonts.montserrat(fontSize: 14),
+                          DataCell(
+                            Text(
+                              item['checkout'],
+                              style: GoogleFonts.montserrat(fontSize: 14),
+                            ),
                           ),
-                        ),
-                        DataCell(
-                          Text(
-                            item['tempo'],
-                            style: GoogleFonts.montserrat(fontSize: 14),
+                          DataCell(
+                            Text(
+                              item['tempo'],
+                              style: GoogleFonts.montserrat(fontSize: 14),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                  .toList()),
+                        ],
+                      ),
+                    )
+                    .toList()),
+          ),
         ),
       ),
     );

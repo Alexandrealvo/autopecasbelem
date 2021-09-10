@@ -21,7 +21,7 @@ class ChamadasController extends GetxController {
   var lng = ''.obs;
   var isLoading = true.obs;
 
-  void getChamadas() {
+  getChamadas() {
     isLoading(true);
     ApiChamadas.getChamadas().then((response) {
       Iterable lista = json.decode(response.body);
@@ -30,6 +30,7 @@ class ChamadasController extends GetxController {
       isLoading(false);
     });
   }
+
 
   @override
   void onInit() {

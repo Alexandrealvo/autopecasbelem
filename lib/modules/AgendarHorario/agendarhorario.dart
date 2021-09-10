@@ -144,32 +144,9 @@ class _AgendarHorarioState extends State<AgendarHorario> {
                                   },
                                 ),
                               ),
-                              onPressed: () {
-                                /* print(agendaController.idcliente.value);
-                                agendaController
-                                    .getAgendarVisitas()
-                                    .then((value) {
-                                  if (value == 1) {
-                                    print('teste');
-                                    edgeAlertWidgetTop(
-                                      context,
-                                      'Agendamento Realizado com Sucesso!',
-                                    );
-                                    Get.offNamed('/visualizar_agenda');
-                                    // Get.toNamed('/visualizar_agenda');
-                                  } else if (value == "qtdvazio") {
-                                    edgeAlertWidgetDangerTop(
-                                        context, 'Selecione Qtd de Semanas!');
-                                  } else if (value == "diasvazio") {
-                                    edgeAlertWidgetDangerTop(context,
-                                        'Selecione pelo menos um dia da semana!');
-                                  } else {
-                                    onAlertButtonPressed(
-                                        context,
-                                        'Algo deu errado\n Tente novamente',
-                                        null);
-                                  }
-                                });*/
+                             onPressed: () async {
+                               agendahorarioController.hour.value.text  ="${startSelectedTime.hour.toString()}:${startSelectedTime.minute.toString()}";
+                                await agendahorarioController.changeHours(context);
                               },
                               child: Text(
                                 "Incluir",

@@ -1,5 +1,4 @@
 import 'package:apbelem/modules/MapaAgenda/mapa_agenda_controller.dart';
-import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:apbelem/utils/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

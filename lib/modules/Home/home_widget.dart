@@ -185,7 +185,8 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          //Get.toNamed('/reserva');
+                          print('ir pra mapa');
+                          Get.toNamed('/mapalistaclientes');
                         },
                         child: Container(
                             decoration: BoxDecoration(
