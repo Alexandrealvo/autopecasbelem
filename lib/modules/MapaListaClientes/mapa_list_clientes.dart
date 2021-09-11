@@ -5,9 +5,9 @@ import 'package:apbelem/modules/Clientes/mapa_clientes.dart';
 import 'package:apbelem/utils/box_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MapaListaClientes extends StatefulWidget {
   @override
@@ -25,6 +25,7 @@ class MapaListaClientesState extends State<MapaListaClientes> {
   void initState() {
     super.initState();
     _getClientes();
+
     clientesNum();
   }
 
@@ -47,6 +48,7 @@ class MapaListaClientesState extends State<MapaListaClientes> {
                 BitmapDescriptor.hueViolet,
               )));
         }
+
         isLoading = false;
       });
     });
@@ -74,42 +76,58 @@ class MapaListaClientesState extends State<MapaListaClientes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Mapa Lista Clientes',
-          style: GoogleFonts.montserrat(
-            fontSize: 16,
-            color: Theme.of(context).textSelectionTheme.selectionColor,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(FontAwesomeIcons.search, size: 20),
-              onPressed: () {
-                setState(() {
-                  isSearching = !isSearching;
-                });
-              }),
-        ],
-      ),
-      body: isLoading
-          ? Center(child: CircularProgressIndicator())
-          : Stack(
-              children: <Widget>[
-                _buildGoogleMap(context),
-                isSearching
-                    ? boxSearch(context, search, onSearchTextChanged,
-                        "Pesquise o Cliente")
-                    : Container(),
-                _buildContainer(),
-              ],
+        appBar: AppBar(
+          title: Text(
+            'Localização Cliente',
+            style: GoogleFonts.montserrat(
+              fontSize: 16,
+              color: Theme.of(context).textSelectionTheme.selectionColor,
             ),
-    );
+          ),
+          centerTitle: true,
+        ),
+        body: isLoading
+                ? Container(
+                height: MediaQuery.of(context).size.height,
+                color: Colors.black,
+                child: Center(
+                  child: SizedBox(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 4,
+                      valueColor: AlwaysStoppedAnimation(Colors.red[900]),
+                    ),
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+              )
+            : Stack(
+                children: <Widget>[
+                  _buildGoogleMap(context),
+                  isSearching
+                      ? boxSearch(context, search, onSearchTextChanged,
+                          "Pesquise o Cliente")
+                      : Container(),
+                  _buildContainer(),
+                ],
+                 
+        ));
   }
 
-  Widget _buildContainer() {
+  changeMapMode() {
+    getJsonFile("images/mapa_style.json").then(setMapStyle);
+  }
+
+  Future<String> getJsonFile(String path) async {
+    return await rootBundle.loadString(path);
+  }
+
+  void setMapStyle(String mapStyle) async {
+    final GoogleMapController controller = await _controller.future;
+    controller.setMapStyle(mapStyle);
+  }
+
+ Widget _buildContainer() {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Container(
@@ -187,6 +205,8 @@ class MapaListaClientesState extends State<MapaListaClientes> {
     );
   }
 
+
+ 
   Widget myDetailsContainer1(String nome, end) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -214,19 +234,6 @@ class MapaListaClientesState extends State<MapaListaClientes> {
         SizedBox(height: 5.0),
       ],
     );
-  }
-
-  changeMapMode() {
-    getJsonFile("images/mapa.json").then(setMapStyle);
-  }
-
-  Future<String> getJsonFile(String path) async {
-    return await rootBundle.loadString(path);
-  }
-
-  void setMapStyle(String mapStyle) async {
-    final GoogleMapController controller = await _controller.future;
-    controller.setMapStyle(mapStyle);
   }
 
   Widget _buildGoogleMap(BuildContext context) {
@@ -259,8 +266,8 @@ class MapaListaClientesState extends State<MapaListaClientes> {
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(lat, long),
       zoom: 16,
-      tilt: 50.0,
-      bearing: 45.0,
+      tilt: 40,
+      bearing: 40,
     )));
   }
 }
