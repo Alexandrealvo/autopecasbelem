@@ -38,9 +38,10 @@ class LoginPage extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                     child: Column(children: <Widget>[
+                     
                       Center(
                         child: Container(
-                          padding: const EdgeInsets.only(top: 120),
+                          padding: const EdgeInsets.only(top: 120, bottom: 20),
                           child: Image.asset(
                             "images/logo.png",
                             fit: BoxFit.fill,
@@ -48,9 +49,35 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
+                        Divider(
+                        height: 10,
+                        thickness: 2,
+                        indent: 120,
+                        endIndent: 120,
+                        color: Theme.of(context).buttonColor,
+                      ),
+                      Center(
+                        child: Container(
+                          child: Text(
+                            'PROMOTOR(A)',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: Theme.of(context).buttonColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: 10,
+                        thickness: 2,
+                        indent: 120,
+                        endIndent: 120,
+                        color: Theme.of(context).buttonColor,
+                      ),
                     ])),
                 Positioned(
-                  top: 220,
+                  top: 250,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
@@ -236,7 +263,7 @@ class LoginPage extends StatelessWidget {
                                                 value['genero'];
                                             loginController.phone.value =
                                                 value['phone'];
-                                                
+
                                              var sendTags = {
                                               'idusu':
                                                   loginController.idusu.value,
