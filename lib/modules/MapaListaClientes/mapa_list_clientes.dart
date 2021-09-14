@@ -309,7 +309,7 @@ class MapaListaClientesState extends State<MapaListaClientes> {
             )));
 
             final Uint8List markerIconCliente =
-                await getBytesFromAsset('images/iconUserMap.png', 90);
+                await getBytesFromAsset('images/iconUserMap.png', 120);
 
             if (this.mounted) {
               setState(() {

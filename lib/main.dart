@@ -42,103 +42,113 @@ class MyApp extends StatelessWidget {
       print("Accepted permission: $accepted");
     });
 
+    OneSignal.shared
+        .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+      var titulo = result.notification.title;
+      print('NOTIFICACAO ABERTA: $titulo');
+      if (titulo == 'CHAMADAS') {
+        Get.toNamed('/chamadas');
+      } else if (titulo == 'COMUNICADOS') {
+        Get.toNamed('/comunicados');
+      } else {}
+    });
+
     return GetMaterialApp(
-    localizationsDelegates: [
-      RefreshLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-    ],
-    supportedLocales: [Locale('pt')],
-    initialRoute: '/login',
-    theme: admin,
-    debugShowCheckedModeBanner: false,
-    getPages: [
-      GetPage(
-        name: '/login',
-        page: () => LoginPage(),
-      ),
-      GetPage(
-        name: '/home',
-        page: () => HomePage(),
-      ),
-      GetPage(
-        name: '/senha',
-        page: () => Senha(),
-      ),
-      GetPage(
-        name: '/perfil',
-        page: () => Perfil(),
-      ),
-      GetPage(
-        name: '/chamadas',
-        page: () => Chamadas(),
-      ),
-      GetPage(
-        name: '/mudarstatus',
-        page: () => MudarStatus(),
-      ),
-      GetPage(
-        name: '/mapacliente',
-        page: () => MapaCliente(),
-      ),
-      GetPage(
-        name: '/esqueci',
-        page: () => Esqueci(),
-      ),
-      GetPage(
-        name: '/clientes',
-        page: () => Clientes(),
-      ),
-      GetPage(
-        name: '/dadosresp',
-        page: () => DadosResp(),
-      ),
-      GetPage(
-        name: '/agendar_visitas',
-        page: () => AgendarVisitas(),
-      ),
-      GetPage(
-        name: '/visualizar_agenda',
-        page: () => VisualizarAgenda(),
-      ),
-      GetPage(
-        name: '/comunicados',
-        page: () => Comunicados(),
-      ),
-      GetPage(
-        name: '/detalhesComunicados',
-        page: () => DetalhesComunicadosPage(),
-      ),
-      GetPage(
-        name: '/agendarhorario',
-        page: () => AgendarHorario(),
-      ),
-      GetPage(
-        name: '/mapaAgenda',
-        page: () => MapaAgendaPage(),
-      ),
-      GetPage(
-        name: '/infoCheck',
-        page: () => InfoCheckPage(),
-      ),
-      GetPage(
-        name: '/visitas',
-        page: () => VisitasPage(),
-      ),
-      GetPage(
-        name: '/dataTableVisitas',
-        page: () => DataTableVisitas(),
-      ),
-      GetPage(
-        name: '/detalhesvisitas',
-        page: () => DetalhesVisita(),
-      ),
-      GetPage(
-        name: '/mapalistaclientes',
-        page: () => MapaListaClientes(),
-      ),
-   ],
+      localizationsDelegates: [
+        RefreshLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [Locale('pt')],
+      initialRoute: '/login',
+      theme: admin,
+      debugShowCheckedModeBanner: false,
+      getPages: [
+        GetPage(
+          name: '/login',
+          page: () => LoginPage(),
+        ),
+        GetPage(
+          name: '/home',
+          page: () => HomePage(),
+        ),
+        GetPage(
+          name: '/senha',
+          page: () => Senha(),
+        ),
+        GetPage(
+          name: '/perfil',
+          page: () => Perfil(),
+        ),
+        GetPage(
+          name: '/chamadas',
+          page: () => Chamadas(),
+        ),
+        GetPage(
+          name: '/mudarstatus',
+          page: () => MudarStatus(),
+        ),
+        GetPage(
+          name: '/mapacliente',
+          page: () => MapaCliente(),
+        ),
+        GetPage(
+          name: '/esqueci',
+          page: () => Esqueci(),
+        ),
+        GetPage(
+          name: '/clientes',
+          page: () => Clientes(),
+        ),
+        GetPage(
+          name: '/dadosresp',
+          page: () => DadosResp(),
+        ),
+        GetPage(
+          name: '/agendar_visitas',
+          page: () => AgendarVisitas(),
+        ),
+        GetPage(
+          name: '/visualizar_agenda',
+          page: () => VisualizarAgenda(),
+        ),
+        GetPage(
+          name: '/comunicados',
+          page: () => Comunicados(),
+        ),
+        GetPage(
+          name: '/detalhesComunicados',
+          page: () => DetalhesComunicadosPage(),
+        ),
+        GetPage(
+          name: '/agendarhorario',
+          page: () => AgendarHorario(),
+        ),
+        GetPage(
+          name: '/mapaAgenda',
+          page: () => MapaAgendaPage(),
+        ),
+        GetPage(
+          name: '/infoCheck',
+          page: () => InfoCheckPage(),
+        ),
+        GetPage(
+          name: '/visitas',
+          page: () => VisitasPage(),
+        ),
+        GetPage(
+          name: '/dataTableVisitas',
+          page: () => DataTableVisitas(),
+        ),
+        GetPage(
+          name: '/detalhesvisitas',
+          page: () => DetalhesVisita(),
+        ),
+        GetPage(
+          name: '/mapalistaclientes',
+          page: () => MapaListaClientes(),
+        ),
+      ],
     );
   }
 }
-

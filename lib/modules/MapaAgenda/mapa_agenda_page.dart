@@ -94,7 +94,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
 
     Future.delayed(Duration(seconds: 2)).then((_) async {
       final Uint8List markerIconCliente =
-          await getBytesFromAsset('images/iconUserMap.png', 90);
+          await getBytesFromAsset('images/iconUserMap.png', 100);
       if (this.mounted) {
         // check whether the state object is in tree
         setState(() {
@@ -205,7 +205,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
 
 
             final Uint8List markerIconCliente =
-                await getBytesFromAsset('images/iconUserMap.png', 90);
+                await getBytesFromAsset('images/iconUserMap.png', 100);
 
             if (this.mounted) {
               mapaAgendaController.ourLat.value = position.latitude;

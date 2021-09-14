@@ -58,7 +58,7 @@ class MapaClienteState extends State<MapaCliente> {
                 : Stack(
                     children: <Widget>[
                       _buildGoogleMap(context),
-                      _buildContainer(),
+                     _boxes(),
                     ],
                   );
           },
@@ -78,7 +78,7 @@ class MapaClienteState extends State<MapaCliente> {
     controller.setMapStyle(mapStyle);
   }
 
-  Widget _buildContainer() {
+  /*Widget _buildContainer() {
     return Positioned(
       bottom: 10,
       right: 5,
@@ -103,16 +103,19 @@ class MapaClienteState extends State<MapaCliente> {
         ],
       ),
     );
-  }
+  }*/
 
-  Widget _boxes(double lat, double long, String nome, String end) {
+  Widget _boxes() {
     return Positioned(
       bottom: 10,
       right: 10,
       child: FloatingActionButton(
         elevation: 10,
         onPressed: () {
-          _gotoLocation(lat, long);
+          _gotoLocation(
+            double.parse(clientesController.lat.value),
+            double.parse(clientesController.lng.value),
+          );
         },
         child: Icon(
           Icons.my_location_outlined,

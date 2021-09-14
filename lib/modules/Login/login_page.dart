@@ -51,9 +51,9 @@ class LoginPage extends StatelessWidget {
                       ),
                         Divider(
                         height: 10,
-                        thickness: 2,
-                        indent: 120,
-                        endIndent: 120,
+                        thickness: 1.5,
+                        indent: 130,
+                        endIndent: 130,
                         color: Theme.of(context).buttonColor,
                       ),
                       Center(
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                           child: Text(
                             'PROMOTOR(A)',
                             style: GoogleFonts.montserrat(
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.w800,
                               color: Theme.of(context).buttonColor,
                             ),
@@ -70,9 +70,9 @@ class LoginPage extends StatelessWidget {
                       ),
                       Divider(
                         height: 10,
-                        thickness: 2,
-                        indent: 120,
-                        endIndent: 120,
+                        thickness: 1.5,
+                        indent: 130,
+                        endIndent: 130,
                         color: Theme.of(context).buttonColor,
                       ),
                     ])),

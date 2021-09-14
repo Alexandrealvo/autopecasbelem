@@ -31,7 +31,7 @@ class MapaAgendaController extends GetxController {
 
   var markers = <Marker>{}.obs;
 
-  getClientes() async {
+  getClientes() {
     markers.assign(
       Marker(
         markerId: MarkerId(name.value),
@@ -40,8 +40,8 @@ class MapaAgendaController extends GetxController {
           title: name.value,
           snippet: "$adress",
         ),
-        icon: await BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(size: Size(48, 48)), 'images/cliente.png'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueYellow)
       ),
     );
     isLoading(false);
