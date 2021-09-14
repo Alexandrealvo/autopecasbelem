@@ -15,29 +15,31 @@ Widget boxSearch(
       controller: searchController,
       style: GoogleFonts.montserrat(
         fontSize: 14,
-        color: Theme.of(context).textSelectionTheme.selectionColor,
+        color: Theme.of(context).buttonColor,
       ),
+    
       decoration: InputDecoration(
         labelText: textopesquisa,
         labelStyle: GoogleFonts.montserrat(
           fontSize: 12,
-          color: Theme.of(context).textSelectionTheme.selectionColor,
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).buttonColor,
         ),
         prefixIcon: Icon(
           Feather.search,
-          color: Theme.of(context).textSelectionTheme.selectionColor,
+          color: Theme.of(context).buttonColor,
           size: 20,
         ),
         isDense: true,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).textSelectionTheme.selectionColor,
+            color: Theme.of(context).buttonColor,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).textSelectionTheme.selectionColor,
+            color: Theme.of(context).buttonColor,
           ),
           borderRadius: BorderRadius.circular(12),
         ),

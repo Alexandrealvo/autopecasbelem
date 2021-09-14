@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 
 class AuthController extends GetxController {
@@ -58,6 +59,17 @@ class AuthController extends GetxController {
           loginController.birthdate.value = value['birthdate'];
           loginController.genero.value = value['genero'];
           loginController.phone.value = value['phone'];
+          var sendTags = {
+            'idusu': loginController.idusu.value,
+            'nome': loginController.nome.value,
+            'tipousu': loginController.tipousu.value,
+          };
+
+          OneSignal.shared.sendTags(sendTags).then((response) {
+            print("Successfully sent tags with response: $response");
+          }).catchError((error) {
+            print("Encountered an error sending tags: $error");
+          });
           Get.toNamed('/home');
           loginController.isLoading.value = false;
         });

@@ -106,68 +106,32 @@ class MapaClienteState extends State<MapaCliente> {
   }
 
   Widget _boxes(double lat, double long, String nome, String end) {
-    return GestureDetector(
-      onTap: () {
-        _gotoLocation(lat, long);
-      },
-      child: Container(
-        child: new FittedBox(
-          child: Material(
-              color: Theme.of(context).buttonColor,
-              elevation: 12,
-              borderRadius: BorderRadius.circular(10),
-              shadowColor: Colors.black,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    child: Icon(
-                      Icons.center_focus_weak,
-                      size: 40,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
-              )),
+    return Positioned(
+      bottom: 10,
+      right: 10,
+      child: FloatingActionButton(
+        elevation: 10,
+        onPressed: () {
+          _gotoLocation(lat, long);
+        },
+        child: Icon(
+          Icons.my_location_outlined,
+          color: Colors.white,
         ),
+        backgroundColor: Theme.of(context).errorColor,
+        heroTag: 'call',
+        shape: CircleBorder(
+          side: BorderSide(
+            color: Colors.white,
+            width: 4.0,
+          ),
+        ),
+        tooltip: 'Call',
       ),
     );
   }
 
-  /*Widget myDetailsContainer1(String nome, end) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-              child: Container(
-                  child: Text(
-                nome,
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.bold),
-              )),
-            ),
-          ],
-        ),
-        SizedBox(height: 5.0),
-        Container(
-            child: Text(
-          end,
-          style: TextStyle(
-            color: Theme.of(context).primaryColor,
-            fontSize: 10,
-          ),
-        )),
-        SizedBox(height: 5.0),
-        
-      ],
-    );
-  }*/
+  
 
   Widget _buildGoogleMap(BuildContext context) {
     return Container(

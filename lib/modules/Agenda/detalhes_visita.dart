@@ -1,5 +1,6 @@
 import 'package:apbelem/modules/MapaAgenda/mapa_agenda_controller.dart';
 import 'package:apbelem/utils/custom_text_field.dart';
+import 'package:apbelem/utils/get_date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,8 +82,8 @@ class DetalhesVisita extends StatelessWidget {
                     child: Text(
                       'Check-in realizado em:',
                       style: GoogleFonts.montserrat(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        
                         color:
                             Theme.of(context).textSelectionTheme.selectionColor,
                       ),
@@ -107,9 +108,10 @@ class DetalhesVisita extends StatelessWidget {
                       ),
                       Center(
                         child: Text(
-                          getFormatedDate(mapaAgendaController.checkin.value),
+                          getDateFormat(mapaAgendaController.checkin.value),
                           style: GoogleFonts.montserrat(
-                            fontSize: 12,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                             color: Theme.of(context)
                                 .textSelectionTheme
                                 .selectionColor,
@@ -129,8 +131,8 @@ class DetalhesVisita extends StatelessWidget {
                     child: Text(
                       'Check-out realizado em:',
                       style: GoogleFonts.montserrat(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                       
                         color:
                             Theme.of(context).textSelectionTheme.selectionColor,
                       ),
@@ -155,9 +157,10 @@ class DetalhesVisita extends StatelessWidget {
                       ),
                       Center(
                         child: Text(
-                          mapaAgendaController.checkout.value,
+                            getDateFormat(mapaAgendaController.checkout.value),
                           style: GoogleFonts.montserrat(
-                            fontSize: 12,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                             color: Theme.of(context)
                                 .textSelectionTheme
                                 .selectionColor,
@@ -226,10 +229,5 @@ class DetalhesVisita extends StatelessWidget {
         }));
   }
 
-  getFormatedDate(_date) {
-    var inputFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    var inputDate = inputFormat.parse(_date);
-    var outputFormat = DateFormat('dd/MM/yyyy HH:mm');
-    return outputFormat.format(inputDate);
-  }
+ 
 }

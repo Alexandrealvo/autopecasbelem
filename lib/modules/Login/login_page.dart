@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
 import 'dart:core';
 
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
 class LoginPage extends StatelessWidget {
   final LoginController loginController =
       Get.put(LoginController(), permanent: true);
@@ -234,7 +236,25 @@ class LoginPage extends StatelessWidget {
                                                 value['genero'];
                                             loginController.phone.value =
                                                 value['phone'];
+                                                
+                                             var sendTags = {
+                                              'idusu':
+                                                  loginController.idusu.value,
+                                              'nome':
+                                                  loginController.nome.value,
+                                              'tipousu':
+                                                  loginController.tipousu.value,
+                                            };
 
+                                                    OneSignal.shared
+                                                .sendTags(sendTags)
+                                                .then((response) {
+                                              print(
+                                                  "Successfully sent tags with response: $response");
+                                            }).catchError((error) {
+                                              print(
+                                                  "Encountered an error sending tags: $error");
+                                            });
                                             Get.toNamed('/home');
                                              loginController.storageId();
                                           }

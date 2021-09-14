@@ -19,10 +19,10 @@ class MapaController extends GetxController {
           title: clientesController.nomecliente.value,
           snippet: "${clientesController.endereco.value}",
         ),
-        icon: await BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(size: Size(48, 48)), 'images/cliente.png'),
-      ),
-    );
+         icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueYellow,
+        )));
+  
     print(markers);
     isLoading(false);
   }

@@ -20,13 +20,29 @@ import 'package:apbelem/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'modules/Login/login_page.dart';
 import 'modules/MapaAgenda/components/InfoCheck/info_check_page.dart';
 import 'modules/Visitas/components/DataTable/data_table_visitas_page.dart';
 
 void main() {
-  runApp(GetMaterialApp(
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+
+    OneSignal.shared.setAppId("258497a7-3022-43c7-98df-4643394dccb3");
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+    OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+      print("Accepted permission: $accepted");
+    });
+
+    return GetMaterialApp(
     localizationsDelegates: [
       RefreshLocalizations.delegate,
       GlobalMaterialLocalizations.delegate,
@@ -121,6 +137,8 @@ void main() {
         name: '/mapalistaclientes',
         page: () => MapaListaClientes(),
       ),
-    ],
-  ));
+   ],
+    );
+  }
 }
+

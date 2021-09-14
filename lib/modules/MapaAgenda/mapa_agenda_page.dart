@@ -23,7 +23,7 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
   final MapaAgendaController mapaAgendaController =
       Get.put(MapaAgendaController());
   Completer<GoogleMapController> _controller = Completer();
-
+  
   Future<void> gotoLocation() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -35,7 +35,7 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
     )));
   }
 
-  
+
 
 Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
       LatLng centerBounds) async {
@@ -224,6 +224,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
                 );
               });
             }
+
             timer();
           },
           circles: Set.from([

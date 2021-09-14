@@ -1,13 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:apbelem/modules/Clientes/api_clientes.dart';
 import 'package:apbelem/modules/Clientes/mapa_clientes.dart';
+import 'package:apbelem/modules/MapaAgenda/mapa_agenda_controller.dart';
 import 'package:apbelem/utils/box_search.dart';
+import 'package:apbelem/utils/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:ui' as ui;
 
 class MapaListaClientes extends StatefulWidget {
   @override
@@ -15,6 +20,8 @@ class MapaListaClientes extends StatefulWidget {
 }
 
 class MapaListaClientesState extends State<MapaListaClientes> {
+  final MapaAgendaController mapaAgendaController =
+      Get.put(MapaAgendaController());
   Completer<GoogleMapController> _controller = Completer();
   List<Dadosclientes> clientes = <Dadosclientes>[];
   bool isLoading = true;
@@ -45,7 +52,7 @@ class MapaListaClientesState extends State<MapaListaClientes> {
                 snippet: clientes[i].endereco,
               ),
               icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueViolet,
+                BitmapDescriptor.hueYellow,
               )));
         }
 
@@ -58,6 +65,7 @@ class MapaListaClientesState extends State<MapaListaClientes> {
 
   var search = TextEditingController();
   var searchResult = [];
+  double zoomVal = 5;
 
   onSearchTextChanged(String text) {
     searchResult.clear();
@@ -71,36 +79,30 @@ class MapaListaClientesState extends State<MapaListaClientes> {
     });
   }
 
-  double zoomVal = 5;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Localização Cliente',
+            'Localização Clientes',
             style: GoogleFonts.montserrat(
               fontSize: 16,
               color: Theme.of(context).textSelectionTheme.selectionColor,
             ),
           ),
           centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  setState(() {
+                    isSearching = !isSearching;
+                  });
+                }),
+          ],
         ),
         body: isLoading
-                ? Container(
-                height: MediaQuery.of(context).size.height,
-                color: Colors.black,
-                child: Center(
-                  child: SizedBox(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 4,
-                      valueColor: AlwaysStoppedAnimation(Colors.red[900]),
-                    ),
-                    height: 40,
-                    width: 40,
-                  ),
-                ),
-              )
+            ? CircularProgressIndicatorWidget()
             : Stack(
                 children: <Widget>[
                   _buildGoogleMap(context),
@@ -108,10 +110,20 @@ class MapaListaClientesState extends State<MapaListaClientes> {
                       ? boxSearch(context, search, onSearchTextChanged,
                           "Pesquise o Cliente")
                       : Container(),
+                  _floatButtomMapa(),
                   _buildContainer(),
                 ],
-                 
-        ));
+              ));
+  }
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+        .buffer
+        .asUint8List();
   }
 
   changeMapMode() {
@@ -127,7 +139,34 @@ class MapaListaClientesState extends State<MapaListaClientes> {
     controller.setMapStyle(mapStyle);
   }
 
- Widget _buildContainer() {
+  Widget _floatButtomMapa() {
+    return Positioned(
+      top: isSearching ? 80 : 10,
+      right: 10,
+      child: FloatingActionButton(
+        elevation: 10,
+        onPressed: () {
+          _gotoMyLocation(mapaAgendaController.ourLat.value,
+              mapaAgendaController.ourLng.value);
+        },
+        child: Icon(
+          Icons.my_location_outlined,
+          color: Colors.white,
+        ),
+        backgroundColor: Theme.of(context).errorColor,
+        heroTag: 'call',
+        shape: CircleBorder(
+          side: BorderSide(
+            color: Colors.white,
+            width: 4.0,
+          ),
+        ),
+        tooltip: 'Call',
+      ),
+    );
+  }
+
+  Widget _buildContainer() {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Container(
@@ -185,9 +224,9 @@ class MapaListaClientesState extends State<MapaListaClientes> {
       child: Container(
         child: new FittedBox(
           child: Material(
-              color: Colors.red[900],
-              elevation: 14.0,
-              borderRadius: BorderRadius.circular(24.0),
+              color: Theme.of(context).errorColor,
+              elevation: 12.0,
+              borderRadius: BorderRadius.circular(20.0),
               shadowColor: Color(0x802196F3),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -205,8 +244,6 @@ class MapaListaClientesState extends State<MapaListaClientes> {
     );
   }
 
-
- 
   Widget myDetailsContainer1(String nome, end) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -250,12 +287,45 @@ class MapaListaClientesState extends State<MapaListaClientes> {
           mapToolbarEnabled: true,
           tiltGesturesEnabled: true,
           initialCameraPosition:
-              CameraPosition(target: LatLng(-1.4241198, -48.4647034), zoom: 12),
-          onMapCreated: (GoogleMapController controller) {
+              CameraPosition(target: LatLng(-1.4241198, -48.4647034), zoom: 14),
+          onMapCreated: (GoogleMapController controller) async {
             if (!_controller.isCompleted) {
               _controller.complete(controller);
             } else {}
             changeMapMode();
+
+            Position position = await Geolocator.getCurrentPosition(
+                desiredAccuracy: LocationAccuracy.high);
+
+            mapaAgendaController.ourLat.value = position.latitude;
+            mapaAgendaController.ourLng.value = position.longitude;
+
+            LatLng latlngPosition =
+                LatLng(position.latitude, position.longitude);
+
+            controller.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+              target: latlngPosition,
+              zoom: 14,
+            )));
+
+            final Uint8List markerIconCliente =
+                await getBytesFromAsset('images/iconUserMap.png', 90);
+
+            if (this.mounted) {
+              setState(() {
+                _markers.add(
+                  Marker(
+                    markerId: MarkerId('Estou Aqui!'),
+                    position: latlngPosition,
+                    infoWindow: InfoWindow(
+                      title: 'Minha Localização',
+                      snippet: "",
+                    ),
+                    icon: BitmapDescriptor.fromBytes(markerIconCliente),
+                  ),
+                );
+              });
+            }
           },
           markers: _markers,
         ));
@@ -266,6 +336,16 @@ class MapaListaClientesState extends State<MapaListaClientes> {
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(lat, long),
       zoom: 16,
+      tilt: 40,
+      bearing: 40,
+    )));
+  }
+
+  Future<void> _gotoMyLocation(double lat, double long) async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(lat, long),
+      zoom: 18,
       tilt: 40,
       bearing: 40,
     )));
