@@ -4,7 +4,6 @@ import 'package:apbelem/utils/get_date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class DetalhesVisita extends StatelessWidget {
   final MapaAgendaController mapaAgendaController =
