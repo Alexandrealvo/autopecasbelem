@@ -23,7 +23,7 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
   final MapaAgendaController mapaAgendaController =
       Get.put(MapaAgendaController());
   Completer<GoogleMapController> _controller = Completer();
-  
+
   Future<void> gotoLocation() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -35,9 +35,7 @@ class _MapaAgendaPageState extends State<MapaAgendaPage> {
     )));
   }
 
-
-
-Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
+  Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
       LatLng centerBounds) async {
     bool keepZoomingOut = true;
     while (keepZoomingOut) {
@@ -115,8 +113,6 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
 
   @override
   Widget build(BuildContext context) {
- 
-         
     Future<String> getJsonFile(String path) async {
       return await rootBundle.loadString(path);
     }
@@ -170,7 +166,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
               );
               controller
                   .animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
-                  final LatLng centerBounds = LatLng(
+              final LatLng centerBounds = LatLng(
                   (bounds.northeast.latitude + bounds.southwest.latitude) / 2,
                   (bounds.northeast.longitude + bounds.southwest.longitude) /
                       2);
@@ -181,7 +177,6 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
                 zoom: 17,
               )));
               zoomToFit(controller, bounds, centerBounds);
-             
             } else {
               LatLngBounds bounds = LatLngBounds(
                 southwest: latLatCliente,
@@ -189,7 +184,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
               );
               controller
                   .animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
-                  final LatLng centerBounds = LatLng(
+              final LatLng centerBounds = LatLng(
                   (bounds.northeast.latitude + bounds.southwest.latitude) / 2,
                   (bounds.northeast.longitude + bounds.southwest.longitude) /
                       2);
@@ -200,9 +195,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
                 zoom: 17,
               )));
               zoomToFit(controller, bounds, centerBounds);
-
             }
-
 
             final Uint8List markerIconCliente =
                 await getBytesFromAsset('images/iconUserMap.png', 100);
@@ -364,9 +357,11 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                   ),
                   onTap: () {
+
                     deleteAlert(context, "Deseja atualizar o GPS?", () async {
                       await mapaAgendaController.doChangeGps(context);
                     });
+                    
                   },
                 ),
                 SpeedDialChild(
@@ -399,6 +394,7 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
               shape: CircleBorder(),
               elevation: 5,
               children: [
+                 
                 SpeedDialChild(
                   child: Icon(Icons.check_box),
                   backgroundColor: Colors.red,
@@ -427,6 +423,18 @@ Future<void> zoomToFit(GoogleMapController controller, LatLngBounds bounds,
                   ),
                   onTap: () {
                     Get.toNamed('/infoCheck');
+                  },
+                ),
+                SpeedDialChild(
+                  child: Icon(Icons.description),
+                  backgroundColor: Colors.blue,
+                  label: 'Detalhes',
+                  labelStyle: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    color: Theme.of(context).textSelectionTheme.selectionColor,
+                  ),
+                  onTap: () {
+                    Get.toNamed('/detalhesvisitas');
                   },
                 ),
               ],

@@ -126,7 +126,10 @@ class DetalhesVisita extends StatelessWidget {
                     endIndent: 20,
                     color: Theme.of(context).buttonColor,
                   ),
-                  Center(
+                  mapaAgendaController.checkout.value != '0000-00-00 00:00:00'
+                      ? Column(
+                          children: [
+                     Center(
                     child: Text(
                       'Check-out realizado em:',
                       style: GoogleFonts.montserrat(
@@ -166,15 +169,21 @@ class DetalhesVisita extends StatelessWidget {
                           ),
                         ),
                       ),
+                    
                     ],
-                  ),
-                  Divider(
+                            ),
+                            Divider(
                     height: 40,
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
                     color: Theme.of(context).buttonColor,
                   ),
+                          ],
+                        )
+                      : Container(),
+                  
+                  
                   Container(
                     padding: EdgeInsets.all(15),
                     child: customTextField(
@@ -185,7 +194,7 @@ class DetalhesVisita extends StatelessWidget {
                       3,
                       true,
                       mapaAgendaController.observacao.value,
-                      false,
+                      true,
                     ),
                   ),
                   ButtonTheme(

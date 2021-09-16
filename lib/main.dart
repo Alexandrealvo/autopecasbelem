@@ -18,6 +18,7 @@ import 'package:apbelem/modules/Senha/senha.dart';
 import 'package:apbelem/modules/Visitas/visitas_page.dart';
 import 'package:apbelem/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -27,6 +28,11 @@ import 'modules/MapaAgenda/components/InfoCheck/info_check_page.dart';
 import 'modules/Visitas/components/DataTable/data_table_visitas_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(MyApp());
 }
 
